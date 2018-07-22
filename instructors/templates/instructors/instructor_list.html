@@ -1,0 +1,146 @@
+{% extends 'base.html'%}
+{%load static%}
+{% block title %} Инструктор по вождению, отзывы, рейтинг, Водибезопасно{% endblock %}
+{% block content %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/instructor/">Инструкторы</a></li>
+   </ol>
+</div>
+<h1 class="page-title">Рейтинг и отзывы об инструкторах {% if city %}г.{{city}}{% else %}{% endif %}</h1>
+<p class="page-desc">Опытный инструктор по вождению сможет дать новичку автомобилисту качественное обучение вождению. Именно от него будет зависеть, насколько правильные навыки вы получите во время вождения по городу.
+
+Хороший инструктор должен быть не только квалифицирован в данном вопросе, но и иметь устойчивую психику, большую выдержку и терпение.
+
+Здесь, вы можете посмотреть отзывы об инструкторах и так же записаться к понравившемуся вам инструктору.
+</p>
+<div class="list school-list container-fluid">
+    {% for item in instructor_list|dictsort:"premium" %}
+    {% if item.premium %}
+   <div class="list-item row">
+      <div class="col-md-5 col-lg-6 col-xl-4">
+          {%if item.premium%}
+            <div class="stamp-list">
+                <img src="{% static 'images/provereno.png'%}" alt="{{instructor.fio}}" class="img-responsive center-block"> 
+            </div>
+            {%endif%}
+         <a href="{% url 'instructor:instructordetail' slug=item.slug %}">
+         <img srcset="{% if item.logo %}{{item.logo.url}}{% endif %}" alt="{{item.title}}" class="img-responsive center-block instructors-img">                </a>
+      </div>
+      <div class="col-md-7 col-lg-6 col-xl-8 instructors">
+         <h2><a href="{% url 'instructor:instructordetail' slug=item.slug %}">{{item.fio}}</a></h2>
+         <div class="mini-menu">
+            Рейтинг: 
+            {%if item.premium%}
+            <span class="stars-pro-wrapper">
+                <span class="stars stars5"></span>
+            </span>
+            {%elif item.avg_review == None%}
+             <span class="rating">Нет оценок</span>
+            {%else%}
+            <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {%endif%}
+            <div class="avto-in-instructor-list">
+            {%if item.car_akpp%}
+            <i class="fa fa-car" aria-hidden="true"></i> Автомобиль: <span>{{item.car_akpp}}</span>
+            {%endif%}
+            {%if item.car_mkpp%}
+            <small>|</small>
+            <i class="fa fa-car" aria-hidden="true"></i> Автомобиль: <span>{{item.car_mkpp}}</span>
+            {%endif%}
+             {%if item.car_learner%}
+            <small>|</small>
+            <i class="fa fa-car" aria-hidden="true"></i><span> На автомобиле ученика</span>
+            {%endif%}
+            </div>
+            <div class="coast-in-instructor-list properties">
+                <span class="cost">Стоимость за 1 час: {{item.coast}}руб.</span>
+                {%if item.smoke%}
+                <small>|</small>
+                <span><i class="fa fa-minus-circle" aria-hidden="true"></i> Курит</span>
+                {%else%}
+                <small>|</small>
+                <span><i class="fa fa-minus-circle" aria-hidden="true"></i> Не курит</span>
+                {%endif%}
+                <small>|</small>
+                <a href="{% url 'instructor:instructordetail' slug=item.slug %}">Контакты</a>
+                <small>|</small>
+                <a href="{% url 'instructor:instructordetail' slug=item.slug %}">Отзывы</a>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endif %}
+   {% endfor %}
+   
+    {% for item in instructor_list %}
+      {% if item.premium == False %}
+   <div class="list-item row">
+      <div class="col-md-5 col-lg-6 col-xl-4">
+          {%if item.premium%}
+            <div class="stamp-list">
+                <img src="{% static 'images/provereno.png'%}" alt="{{instructor.fio}}" class="img-responsive center-block"> 
+            </div>
+            {%endif%}
+         <a href="{% url 'instructor:instructordetail' slug=item.slug %}">
+         <img srcset="{% if item.logo %}{{item.logo.url}}{% endif %}" alt="{{item.title}}" class="img-responsive center-block instructors-img">                </a>
+      </div>
+      <div class="col-md-7 col-lg-6 col-xl-8 instructors">
+         <h2><a href="{% url 'instructor:instructordetail' slug=item.slug %}">{{item.fio}}</a></h2>
+         <div class="mini-menu">
+            Рейтинг: 
+            {%if item.avg_review == None%}
+            <span class="rating">Нет оценок</span>
+            {%else%}
+            <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {%endif%}
+            <div class="avto-in-instructor-list">
+            {%if item.car_akpp%}
+            <i class="fa fa-car" aria-hidden="true"></i> Автомобиль: <span>{{item.car_akpp}}</span>
+            {%endif%}
+            {%if item.car_mkpp%}
+            <small>|</small>
+            <i class="fa fa-car" aria-hidden="true"></i> Автомобиль: <span>{{item.car_mkpp}}</span>
+            {%endif%}
+             {%if item.car_learner%}
+            <small>|</small>
+            <i class="fa fa-car" aria-hidden="true"></i><span> На автомобиле ученика</span>
+            {%endif%}
+            </div>
+            <div class="coast-in-instructor-list properties">
+                <span class="cost">Стоимость за 1 час: {{item.coast}}руб.</span>
+                {%if item.smoke%}
+                <small>|</small>
+                <span><i class="fa fa-minus-circle" aria-hidden="true"></i> Курит</span>
+                {%else%}
+                <small>|</small>
+                <span><i class="fa fa-minus-circle" aria-hidden="true"></i> Не курит</span>
+                {%endif%}
+                <small>|</small>
+                <a href="{% url 'instructor:instructordetail' slug=item.slug %}">Контакты</a>
+                <small>|</small>
+                <a href="{% url 'instructor:instructordetail' slug=item.slug %}">Отзывы</a>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endif %}
+   {% endfor %}
+   <div class="pagination">
+    <span class="step-links">
+        {% if instructor_list.has_previous %}
+            <a href="?page={{ instructor_list.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ instructor_list.number }} из {{ instructor_list.paginator.num_pages }}
+        </span>
+
+        {% if instructor_list.has_next %}
+            <a href="?page={{ instructor_list.next_page_number }}">следующая</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

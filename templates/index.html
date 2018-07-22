@@ -1,0 +1,128 @@
+{% extends 'base.html'%}
+{%load static%}
+{% load thumbnail %}
+{% block home_page%}
+
+<div class="container sitecontainer home-news">
+   <h2><a href="/news/">Последние новости</a></h2>
+   <hr class="border">
+   <div class="row blocks">
+      {%for item in news|slice:":8"%}
+      <div class="block-item col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+         <a href="/news/{{item.slug}}">
+         <img src="{% thumbnail item.pict 255x155 crop%}" alt="{{item.title}}" class="img-responsive center-block"/>
+         </a>
+         <h2><a href="/news/{{item.slug}}">{{item.title}}</a></h2>
+         <p class="date">{{item.born}}</p>
+      </div>
+      {%endfor%}
+   </div>
+   <p><a href="/news/">Все новости <i class="fa fa-angle-right"></i></a></p>
+</div>
+<div class="container sitecontainer home-articles">
+   <div class="row">
+
+   
+      
+        {%for item in article_list|slice:":7"%}
+     
+      <div class="{% if forloop.counter == 1%}col-md-8 col-lg-6{% else %}col-md-4 col-lg-3{% endif %}">
+         <a href="{% url 'articles:article_detail' category_slug=item.category.slug slug=item.slug %}" class="item item-first">
+            <div class="item-image">
+               <picture>
+                    {% if forloop.counter == 1%}    
+                        <img src="{% thumbnail item.pict 540x405 crop%}" alt="{{item.title}}">
+                    {% else %}
+                        <img src="{% thumbnail item.pict 255x290 crop%}" alt="{{item.title}}">
+                    {% endif %} 
+               </picture>
+            </div>
+            <div class="item-category category-law">{{item.category}}</div>
+            <div class="item-content">
+               <p class="date">{{item.born}}</p>
+               <h2>{{item.title}}</h2>
+            </div>
+         </a>
+      </div>
+
+
+
+      {%endfor%}
+      
+   </div>
+   <p class="more"><a href="/article/">Все статьи <i class="fa fa-angle-right"></i></a></p>
+   <hr class="border">
+</div>
+ 
+{% endblock %}
+{% block content %}             
+<!--'start_frame_cache_iJBuqa'-->
+<h1 class="page-title"><p>Лучшие автошколы {% if city %}г.{{city}}{% endif %}</p></h1>
+<div class="list school-list container-fluid">
+   
+   {%  for item in school_list %}
+   <div class="list-item row">
+      <div class="col-md-5 col-lg-6 col-xl-4">
+         <a href="{% url 'school:schooldetail' slug=item.slug %}">
+         <img src="{% thumbnail item.logo 200x200 %}" alt="{{item.title}}" class="img-responsive center-block">                </a>
+      </div>
+      <div class="col-md-7 col-lg-6 col-xl-8">
+         <h2><a href="{% url 'school:schooldetail' slug=item.slug %}">{{item.title}}</a></h2>
+         <div class="mini-menu">
+            {% if item.premium %}
+            {% if item.avg_review == None %}
+            <span class="stars-pro-wrapper"><span class="stars stars5"></span>
+            {%else%}
+            <span class="stars-pro-wrapper"><span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {%endif%}
+            {% else %}
+            <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {% endif %}
+            </span>
+            
+            <small>|</small>
+            <a href="{% url 'school:reviewlist' slug=item.slug %}"><i class="fa fa-comments-o"></i> <span>Отзывы</span></a>
+            <small>|</small> <a href="{% url 'school:branchlist' slug=item.slug %}"><i class="fa fa-map-marker"></i> <span>Филиалы</span></a>                   
+            {% if item.premium %}  <small>|</small> <a href="{% url 'school:fotolist' slug=item.slug %}"><i class="fa fa-picture-o"></i> <span>Фото</span></a>
+            <small>|</small> <a href="{% url 'school:document_list' slug=item.slug %}"><i class="fa fa-book"></i> <span>Документы</span></a>  
+            {% endif %}             
+         </div>
+         <div class="address">
+            <address>{{item.adress}}</address>
+            <p class="phone">{{item.phone_number}}</p>
+         </div>
+        <p class="properties">
+            <span class="cat">{% for i in item.category_education.all %}<abbr title="Обучение на категорию {{i}}">{{i}}</abbr>{% endfor %}</span>
+            <span class="time" title="Обучение занимает {{item.term}} месяца">{{item.term}} месяца</span>                    <span class="cost" title="Обучение стоит {{item.cost}}₽ руб.">{{item.cost}}₽ {%if item.gsm%}Включая ГСМ{%endif%}<span class="param-no-fuel"></span></span>                
+            {% if item.photograph%}<span class="photo" title="В автошколе можно сделать фото на документы">фотограф</span>{% endif %}
+            {% if item.med%}<span class="medicine" title="В автошколе можно можно пройти медкомиссию">медкомиссия</span>{% endif %}
+            {% if item.online%}<span class="online" title="Автошкола предлагает дистанционное онлайн-обучение">онлайн-обучение</span>{% endif %} 
+         </p>
+      </div>
+   </div>
+   {% endfor %}
+   <div class="pagination">
+    <span class="step-links">
+        {% if school_list.has_previous %}
+            <a href="?page={{ school_list.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ school_list.number }} из {{ school_list.paginator.num_pages }}
+        </span>
+
+        {% if school_list.has_next %}
+            <a href="?page={{ school_list.next_page_number }}">следующая</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+ {% if city %}
+ <li><a href="{% url 'city:city_school_list' slug=city.slug%}">Рейтинг автошкол г.{{city}}</a></li>
+ {% else %}
+  <li><a href="#"> <span id="loc-name" class="location-name">Выберите город</span></a></li>
+  {% endif %}
+
+<!--'end_frame_cache_iJBuqa'-->  
+
+{% endblock %}

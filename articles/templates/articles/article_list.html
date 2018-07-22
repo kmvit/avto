@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block title %}Статьи авто, автомобильные статьи{% endblock %}
+{% block description %}На странице представлены автомобильные статьи со всего мира{% endblock %}
+{% block bread %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li>Статьи</li>
+   </ol>
+</div>
+{% endblock %}
+{% block content %}
+<h1 class="page-title">Статьи</h1>
+<div class="list">
+   {% for item in article_list %}
+   <div class="list-item row">
+      <div class="col-md-5 col-lg-6 col-xl-4">
+         <a href="{% url 'articles:article_detail' category_slug=item.category.slug slug=item.slug %}">
+         <img src="{% thumbnail item.pict 255x155 crop %}" alt="Как пожаловаться на эвакуаторщиков" class="img-responsive center-block">
+         </a>
+      </div>
+      <div class="col-md-7 col-lg-6 col-xl-8">
+         <h2><a href="{% url 'articles:article_detail' category_slug=item.category.slug slug=item.slug %}">{{item.title}}</a></h2>
+         <p>{{item.body|slice:":200"|safe}}</p>
+         <p class="date">{{item.born}}</p>
+      </div>
+   </div>
+   {% endfor %}
+   <div class="pagination">
+    <span class="step-links">
+        {% if article_list.has_previous %}
+            <a href="?page={{ article_list.previous_page_number }}">Предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ article_list.number }} из {{ article_list.paginator.num_pages }}
+        </span>
+
+        {% if article_list.has_next %}
+            <a href="?page={{ article_list.next_page_number }}">Следующая</a>
+        {% endif %}
+    </span>
+</div>
+   <hr>
+</div>
+<nav class="text-center">
+
+</nav>
+{% endblock %}
+{% block sidebar %}
+<div class="sidebar-articles">
+<p class="h4">Категории статей</p>
+<hr class="border">
+<ul class="category_list">
+    {% for item in category_list %}
+    <li><a href="{% url 'articles:category_detail' slug=item.slug%}">{{item.title}}</a></li>
+    {% endfor %}
+     <li><a href="/article/faq/">Вопрос? Ответ!</a></li>
+</ul>
+</div>
+<div class="sidebar-articles">
+    <p class="h4">Интересные статьи</p>
+    <hr class="border">
+    {% load article_tags %}
+    {% article_sidebar %}
+</div>
+<div class="sidebar-articles">
+    <p class="h4">Интересные новости</p>
+    <hr class="border">
+    {% load news_tags %}
+    {% news_sidebar %}
+    </div>    
+{% endblock %}

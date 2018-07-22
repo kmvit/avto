@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block content %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/school/">Автошколы</a></li>
+      <li>{{school.title}}</li>
+   </ol>
+</div>
+<h1 class="page-title">Спасибо {{review.name}}, ваш отзыв добавлен!</h1>
+<a href="{%url 'school:schooldetail' slug=school.slug%}">Посмотреть</a>
+
+{% endblock %}

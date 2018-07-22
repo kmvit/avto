@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block content %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/school/">Автошколы</a></li>
+      <li>{{school.title}}</li>
+   </ol>
+</div>
+<h1 class="page-title"> Поздравляем, Вы сделали правильный выбор на пути к безопасному вождению! С наилучшими пожеланиями vodibezopasno.com</h1>
+<a onclick="history.back(); return false;">Вернуться назад</a>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'profiles/profile_detail.html'%}
+{% load static %}
+{% block content %}
+<h1 class="page-title">Мои автошколы</h1>
+<div class="alert alert-success" role="alert">
+   <p>{{request.user.first_name}}! Портал vodibezopasno создан для поиска и сведения автошкол с потенциальными учениками. Вы хотите привлечь больше учеников в Вашу автошколу?! Ознакомьтесь с премиум возможностями для Вашей автошколы. Кнопка ссылка на страницу с описанием премиум доступа.</p>
+   <p><a href="/pages/account-pro/" class="alert-link">Познакомьтесь с возможностями Профессионального аккаунта</a></p>
+</div>
+<p><a href="{%url 'profiles:profile_schools_add' pk=user.id %}" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Добавить автошколу</a></p>
+<table class="table table-hover user-schools">
+   <tbody>
+      {%for item in school_list%}
+      <tr>
+         <td>
+            <p class="h3"><a href="{%url 'profiles:profile_school_edit' pk=user.id slug=item.slug%}">{{item.title}}</a></p>
+            <small>{{item.city}}</small>
+            <ul class="profile-school-button">
+                  {%if item.premium%}
+                  <li><a href="{%url 'profiles:profile_schoolimage_list' pk=user.id slug=item.slug%}"><i class="fa fa-fw fa-picture-o"></i> Добавить фото</a></li>
+                  <li><a href="{%url 'profiles:profile_schooldocument_list' pk=user.id slug=item.slug%}"><i class="fa fa-fw fa-book"></i> Добавить документы </a></li>
+                  <li><a href="{%url 'school:reviewlist' slug=item.slug%}"><i class="fa fa-comment"></i> Ответить на отзывы </a></li>
+                  <li><a href="{%url 'profiles:profile_school_edit_social' pk=user.id slug=item.slug%}"><i class="fa fa-fw fa-facebook"></i> Официальные соц.сети </a></li>
+                  <li><a href="{%url 'school:feedbackschool_list' slug=item.slug%}"><i class="fa fa-envelope"></i> Онлайн заявки </a></li>
+                  {%endif%}
+               </ul>
+         </td>
+         <!-- <td class="text-right">
+            <div class="dropdown">
+               <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdown-menu-84842" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">изменить <i class="fa fa-angle-down"></i></button>
+               <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-84842">
+                  <li><a href="{%url 'school:schooldetail' slug=item.slug%}"><i class="fa fa-fw fa-link"></i> показать на сайте</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{%url 'profiles:profile_school_edit' pk=user.id slug=item.slug%}"><i class="fa fa-fw fa-pencil"></i> изменить</a></li>
+                  <li><a href="{%url 'profiles:profile_school_delete' pk=user.id slug=item.slug%}"><i class="fa fa-fw fa-trash-o"></i> удалить</a></li>
+                  <li><a href="{%url 'profiles:profile_branch_list' pk=user.id slug=item.slug%}"><i class="fa fa-fw fa-map-marker"></i> филиалы</a></li>
+                  
+
+                  {%if item.premium%}
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{%url 'profiles:profile_schoolimage_list' pk=user.id slug=item.slug%}"><i class="fa fa-fw fa-picture-o"></i> фото</a></li>
+                  <li><a href="/cabinet/driving-schools/video/?id=84842"><i class="fa fa-fw fa-youtube"></i> видео</a></li>
+                  <li><a href="{%url 'profiles:profile_schooldocument_list' pk=user.id slug=item.slug%}"><i class="fa fa-fw fa-book"></i> документы </a></li>
+                  {%endif%}
+               </ul>
+            </div>
+         </td> -->
+      </tr>
+      {%endfor%}
+   </tbody>
+</table>
+<div class="alert alert-info">
+   <p>Увеличивайте количество положительных отзывов и рейтинг автошколы с помощью промо-материалов, которые мы подготовили специально для вас.</p>
+   <p><a href="/cabinet/promo/" class="alert-link">Узнайте подробности в разделе "Промо"</a></p>
+</div>
+{%endblock%}

@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load easy_maps_tags %}
+{% block content %}
+<script>
+   function agreeForm(f) {
+    // Если поставлен флажок, снимаем блокирование кнопки
+    if (f.agree.checked) f.submit.disabled = 0 
+    // В противном случае вновь блокируем кнопку
+    else f.submit.disabled = 1
+   }
+  </script>
+  <p>Задавайте любой интересующий вопрос касаемо обучения в автошколе, сдачи экзаменов в ГИБДД и любых тем имеющих отношение к обучению либо к работе автошколы. Все Ваши вопросы будут опубликованы в разделе Вопрос? - Ответ! </p><p>Просмотреть ответы Вы можете нажав на кнопку <a href="/article/faq/">Вопрос?-Ответ!</a> </p>
+<form action="" class="address-form form-horizontal" method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   <fieldset>
+       {% for field in form %}
+   <div class="form-group required">
+      <div class="col-sm-4">
+         {{ field.errors }}
+        {{ field.label_tag }} 
+      </div>
+      <div class="col-sm-8">
+        {{ field }}
+      </div>
+   </div>    
+    {% endfor %}
+    <p><input type="checkbox" name="agree" onclick="agreeForm(this.form)"> 
+    Я согласен на обработку моих персональных данных</p>
+   <input type="submit" class="btn btn-primary" name="submit" value="Задать вопрос" disabled>
+   </fieldset>
+</form>
+{%endblock%}

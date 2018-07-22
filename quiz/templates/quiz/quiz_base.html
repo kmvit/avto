@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block bread %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li>{% block bread_name %}Штрафы{% endblock %}</li>
+   </ol>
+</div>
+{% endblock %}
+{% block menu_quiz %}
+<div class="row">
+    <div class="col-md-12">
+<div class="pdd-menu clearfix">
+   <a href="/quiz" class="pdd-menu__item ">Экзамен</a>
+   <a href="{% url 'quiz:fine_list' %}" class="pdd-menu__item active">Штрафы</a>
+   <a href="{% url 'quiz:rule_list' %}" class="pdd-menu__item ">Правила</a>
+   <a href="{% url 'quiz:roadsings_list' %}" class="pdd-menu__item ">Знаки</a>
+   <a href="{% url 'quiz:road_list' %}" class="pdd-menu__item ">Разметка</a>
+   <a href="/quiz/regul" class="pdd-menu__item ">Регулировщик</a>
+   <a href="/quiz/dopusk" class="pdd-menu__item ">Допуск ТС</a>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block content %}
+{% endblock%}
+
+

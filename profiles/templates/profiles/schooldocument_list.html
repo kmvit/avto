@@ -1,0 +1,18 @@
+{% extends 'profiles/profile_detail.html'%}
+{% load static %}
+{% block content %}
+<h1 class="page-title">Документы автошколы</h1>
+<div class="alert alert-success" role="alert">
+   <p>{{request.user.first_name}}! Узнайте, как мы помогаем продвигать автошколу и получать больше учеников.</p>
+   <p><a href="/pages/account-pro/" class="alert-link">Познакомьтесь с возможностями Профессионального аккаунта</a></p>
+</div>
+<p><a href="{%url 'profiles:profile_schooldocument_add' pk=user.id slug=school.slug %}" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Добавить документ</a></p>
+{% for item in schooldocument_list %}
+<p class="phone"><img src="{{item.img.url}}"></p>
+{% endfor %}
+
+<div class="alert alert-info">
+   <p>Увеличивайте количество положительных отзывов и рейтинг автошколы с помощью промо-материалов, которые мы подготовили специально для вас.</p>
+   <p><a href="/cabinet/promo/" class="alert-link">Узнайте подробности в разделе "Промо"</a></p>
+</div>
+{%endblock%}

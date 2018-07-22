@@ -1,0 +1,15 @@
+{% extends 'quiz/quiz_base.html' %}
+{% load i18n %}
+{% block podbor %}
+{% endblock %}
+{% block title %}{{regul.title}}{% endblock %}
+{% block bread_name %}{{regul.title}}{%endblock%}
+{% block content %}
+<h1 class="news__h1">
+   {{regul.title}}
+</h1>
+<div class="line news__line"></div>
+<div class="row">
+    {{regul.body|safe}}
+</div>
+{% endblock%}

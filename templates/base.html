@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js">
+   <head>
+      {% load static %}
+      {% load profile_tags %}
+      {% load city_tags %}
+      {% load account %}
+      {% block head %}
+      <script data-skip-moving="true">document.documentElement.classList.remove("no-js");</script>
+      <style type="text/css">.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div{font-size:10px}</style>
+      <style type="text/css">@media print {  .gm-style .gmnoprint, .gmnoprint {    display:none  }}@media screen {  .gm-style .gmnoscreen, .gmnoscreen {    display:none  }}</style>
+      <style type="text/css">.gm-style { font: 400 11px Roboto, Arial, sans-serif;text-decoration: none; }.gm-style img { max-width: none; }</style>
+      <title>{% block title %}Автошколы, инструктор по вождению, билеты ПДД, Водибезопасно{% endblock %}
+      </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+      <link rel="icon" href="/local/templates/bootstrap/images/icons/192.png">
+      <link rel="apple-touch-icon" href="/local/templates/bootstrap/images/icons/apple-touch-icon-152x152.png">
+      <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+      <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+      <script type="text/javascript" src="/static/js/template.js"></script>
+      <script src="//api-maps.yandex.ru/2.1/?lang=ru-RU" type="text/javascript"></script>
+      <script src="//yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+      
+      <script type="text/javascript">
+        var jQuery_2_2_3 = $.noConflict(true);
+       </script>
+      <script type="text/javascript" src="/static/js/parsley.js"></script>
+      <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js" type="text/javascript"></script>-->
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script type="text/javascript" src="{% static 'js/my.js' %}"></script> 
+      <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>  
+      <script type="text/javascript" src="{% static 'js/jquery.flexslider.js' %}"></script> 
+      <link rel="stylesheet" href="{% static 'fancybox/source/jquery.fancybox.css' %}" type="text/css" media="screen" />
+      <link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+       
+      <!-- JS file -->
+      <script type="text/javascript" src="{% static 'fancybox/source/jquery.fancybox.pack.js' %}"></script>
+      <script src="{% static 'EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js' %}"></script> 
+      <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta name="description" content="{% block description %}Выбирайте лучшую автошколу Вашего города, читайте отзывы, выбирайте лучшего частного инструктора, читайте последние новости автопромышленности, учите правила дорожного движения и в перед к безопасному вождению.{% endblock %}" />
+      <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700%7CRoboto+Slab&subset=cyrillic" type="text/css"  rel="stylesheet" />
+      <link href="/static/css/template.css" type="text/css"  data-template-style="true"  rel="stylesheet" />
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+      <script src="https://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
+      <script src='https://www.google.com/recaptcha/api.js'></script>
+      <script type="text/javascript">
+    	$(document).ready(function() {
+    		$(".fancybox").fancybox();
+    	});
+      </script>
+      <script>
+        function check() {
+	       if ($('#input').val() != '')
+		$('#sub').removeAttr('disabled');
+	    else
+		$('#sub').attr('disabled','disable');
+        }
+        </script>
+     
+      <script type="text/javascript">
+         $(document).ready(function () {
+             var csrftoken = $.cookie('csrftoken');
+         
+             function csrfSafeMethod(method) {
+                 // these HTTP methods do not require CSRF protection
+                 return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+             }
+         
+             $.ajaxSetup({
+                 beforeSend: function (xhr, settings) {
+                     if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                         xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                     }
+                 }
+             });
+         
+             $('#plaqueOrderFormBTN').click(function (e) {
+                 e.preventDefault();
+                 var mForm = $('plaqueOrderForm').serialize();
+                 console.log(mForm);
+                 $.ajax({
+                     type: 'POST',
+                     url: '{% url 'account_login' %}',
+                     dataType: "json",
+                     contentType: "application/json; charset=utf-8",
+                     data: JSON.stringify(mForm),
+                     success: function (e) {
+                         alert(e)
+                     },
+                     error: function (e) {
+                         console.log(e);
+                     }
+                 });
+                 return false;
+             })
+         })
+      </script>
+      
+      {% endblock %}
+      <meta name="mailru-domain" content="9vwuaqiZ0CIeArnt" />
+   </head>
+   <body>
+      <div class="hidden-xs"></div>
+      <header>
+         {% block header %}
+         <div class="topnav-holder">
+            <div class=" container">
+               <nav class="navbar">
+                  <div class="collapse navbar-collapse">
+                     <ul class="nav navbar-nav social-profiles">
+                        {% load profile_tags %}
+                        {% social_links %}
+                     </ul>
+                     <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown location-dropdown">
+                           <a href="#"><i class="fa fa-map-marker"></i> <span id="loc-name" class="location-name">{% city_title %}</span> <i class="fa fa-angle-down"></i></a>
+                           <ul class="dropdown-menu dropdown-menu-right">
+                              <li class="navbar-location-desktop">
+                                 <div class="container-fluid navbar-location">
+                                    <div class="row capitals">
+                                       <div class="col-sm-12 location-list">
+                                          <a href="#"><i class="fa fa-map-marker"></i> <span id="loc-name-mob" class="location-name"></span> <i class="fa fa-angle-down"></i></a> 
+                                       </div>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                        </li>
+                        <li class="dropdown">
+                           <!--'start_frame_cache_iIjGFB'-->   
+                           {%if user.is_authenticated %}
+                           {% if  user.profile.status != '3' %}
+                           <a href="{%url 'profiles:profile_detail' pk=request.user.id%}" ><i class="fa fa-gear"></i> Личный кабинет</a>
+                           {% else %}
+                        
+                           {% endif %}
+                          
+                           {%else%}
+                           <a href="/auth/" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-sign-in"></i> Регистрация / Вход <i class="fa fa-angle-down"></i></a>
+                           <ul class="login-box dropdown-menu dropdown-menu-right">
+                              <li class="navbar-user-desktop">
+                                 <div class="row navbar-user">
+                                    <div class="col-md-12">
+                                       <!--<form class="plaqueOrderForm auth-form" id="plaqueOrderForm" method="POST" action="/accounts/login/">
+                                          {% csrf_token %}
+                                          <div class="form-group has-feedback">
+                                             <label class="sr-only" for="USER_LOGIN">e-mail адрес</label>
+                                             <input autofocus="autofocus" id="id_login" name="login" placeholder="E-mail адрес" type="email" required="">
+                                             <i class="fa form-control-feedback"></i>
+                                          </div>
+                                          <div class="form-group has-feedback">
+                                             <label class="sr-only" for="USER_PASSWORD">пароль</label>
+                                             <input id="id_password" name="password" placeholder="Пароль" type="password" required="">
+                                             <i class="fa form-control-feedback"></i>
+                                          </div>
+                                          <div class="checkbox">
+                                             <input id="id_remember" name="remember" type="checkbox"><label for="USER_REMEMBER"><span></span> запомните меня</label>
+                                          </div>
+                                          <div class="form-group">
+                                             <button type="submit" id="plaqueOrderFormBTN" class="btn btn-primary btn-block">Войти</button>
+                                          </div>
+                                          <div class="form-group">
+                                             <div class="help-block text-right"><a href="/auth/?forgot_password=yes" class="light">забыли пароль?</a></div>
+                                          </div>
+                                          </form>-->
+                                    </div>
+                                    <div class="bottom text-center">
+                                       Есть аккаунт? <a href="{%url 'account_login'%}" class="light">Войдите</a>
+                                    </div>
+                                    <div class="bottom text-center">
+                                       Нет аккаунта? <a href="/accounts/signup/" class="light">Зарегистрируйтесь</a>
+                                    </div>
+                                 </div>
+                              </li>
+                           </ul>
+                           {%endif%}
+                           <!--'end_frame_cache_iIjGFB'-->
+                        </li>
+                     </ul>
+                  </div>
+               </nav>
+            </div>
+         </div>
+         
+         
+            {% city_choice %}
+       
+
+         <div class="menu-holder">
+            <nav class="navbar navbar-default">
+               <div class="container">
+                  <div class="navbar-header">
+                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-collapse" aria-expanded="false">
+                     <span class="sr-only">Меню</span>
+                     <span class="icon-bar icon-bar-1"></span>
+                     <span class="icon-bar icon-bar-2"></span>
+                     <span class="icon-bar icon-bar-3"></span>
+                     </button>
+                     <button type="button" class="navbar-toggle navbar-btn-toggle" data-toggle="collapse" data-target=".navbar-location-mobile" aria-expanded="false">
+                     <span class="sr-only">Регион</span>
+                     <i class="fa fa-fw fa-map-marker"></i>
+                     </button>
+                     <button type="button" class="navbar-toggle navbar-btn-toggle" data-toggle="collapse" data-target=".navbar-user-mobile" aria-expanded="false">
+                     <span class="sr-only">Профиль</span>
+                     <i class="fa fa-fw fa-sign-in"></i>
+                     </button>
+                     <a class="navbar-brand" href="/"><img src="{%static 'images/logo.png'%}"><span class="sr-only">vodibezopasno.com</span></a>
+                  </div>
+                  <div class="collapse navbar-collapse" id="main-menu-collapse">
+                     <ul class="nav navbar-nav navbar-right">
+                        {% accept_city %}
+                        <li><a href="{% url 'news:newslist' %}">Новости</a></li>
+                        <li><a href="{% url 'articles:articlelist' %}">Статьи</a></li>
+                        <li><a href="{% url 'quiz:quiz_index' %}">ПДД онлайн</a></li>
+                        <li><a href="{% url 'articles:faq_add' %}">Задать вопрос</a></li>
+                        <li><a href="http://lk.vodibezopasno.com" target="_blank">Теория онлайн</a></li>
+                     </ul>
+                  </div>
+                  <div class="collapse navbar-collapse navbar-user-mobile"></div>
+                  <div class="collapse navbar-collapse navbar-location-mobile"></div>
+               </div>
+               <div class="search-holder">
+                  <div class=" container">
+                     <form action="/search/">
+                        <div class="search-form">
+                           <div class="search-icon"><i class="fa fa-fw fa-search"></i><label for="search-q" class="sr-only">Поиск</label></div>
+                           <div class="search-close"><i class="fa fa-fw fa-times"></i></div>
+                           <div class="search-input">
+                              <input id="search-q" name="q" placeholder="Введите город" autocomplete="off">
+                           </div>
+                        </div>
+                     </form>
+                     <div class="search-results hidden"></div>
+                  </div>
+               </div>
+               <div class='news-category-list'>
+               {% load news_tags %}
+                 {% news_category %} 
+            </div>
+            </nav>
+            
+         </div>
+         {% block hovercontainer%}
+         {% endblock %}
+         {% endblock %}
+         
+      </header>
+      {% block home_page %}
+      {% endblock %}
+      <div class="container sitecontainer contentcontainer">
+         <div class="row">
+            <div class="col-lg-8 col-xl-9 col-content">
+               {% block bread %}
+               {% endblock %}
+               {% block menu_quiz %}
+               {% endblock %}
+               {% block content %}
+               {% endblock %}
+            </div>
+            <div class="col-lg-8 col-xl-3 col-sidebar">
+               <div class="sidebar">
+                  {% block sidebar%}
+                  {% block cabinet %}   
+                  {% endblock %} 
+                  <div class="sidebar-articles">
+                     <p class="h4">Интересные статьи</p>
+                     <hr class="border">
+                     {% load article_tags %}
+                     {% article_sidebar %}
+                  </div>
+                  <!-- ss -->
+                  <!-- /ss -->        
+                  <div class="sidebar-articles">
+                     
+                     <p class="h4">Интересные новости</p>
+                     <hr class="border">
+                     {% load news_tags %}
+                     {% news_sidebar %}
+                  </div>
+                  {% endblock%}
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer>
+         {% block footer%}
+         <div class="footer-menu">
+            <div class="container">
+               <div class="row">
+   
+                  {% load school_tags %}
+                  {% page %}
+
+               </div>
+              {% footer_menu_city %}
+            </div>
+         </div>
+         <div class="footer-copyright">
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-12 text-center">
+    
+                     &copy; Copiright 2017  Является зарегистрированной маркой. Копирование материалов сайта без письменного разрешения - незаконно и преследуется УК РФ                 
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endblock %}
+        <div class="policity-private">
+             <div class="policity-private-inner">
+                <span>Наш Сайт использует <a href="https://vodibezopasno.com/policy/">cookie-файлы</a> и похожие технологии для того, чтобы отличить Вас от других пользователей нашего ресурса </span><span class="b-privacy_policy__close"><a id="close-welcome" href="#">Закрыть</a></span>
+            </div>
+        </div>
+      </footer>
+
+      <!-- Модальное Окно  -->
+        <div id="overlay_city">
+            <div class="popup">
+                <p>Ваш населенный пункт {% city_name %} ?</p>
+                <button id="yes" value="{% city_id %}">Да</button>  | <button id="no">Нет</button> 
+                <button id="close" title="Закрыть" onclick="document.getElementById('overlay_city').style.display='none';"></button>
+            </div>
+        </div>
+       
+      <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter46104576 = new Ya.Metrika({
+                    id:46104576,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    trackHash:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/46104576" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+      <p id="back-top">
+        <a href="#top"><span>^</span> Наверх <span>^</span></a>
+      </p>
+    </body>
+</html>

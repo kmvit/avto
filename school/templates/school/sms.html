@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block content %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/school/">Автошколы</a></li>
+      <li>{{school.title}}</li>
+   </ol>
+</div>
+<h1 class="page-title">Автошколы</h1>
+{% for item in school_list %}
+<label for="school">
+    {{item}}
+<input type="checkbox" value="{{item.id}}" id="id_school" name="school" />
+</label>
+{% endfor %}
+
+<h1 class="page-title">Инструкторы</h1>
+<form action="" method="get" multiple="multiple">
+{% for item in instructor_list %}
+<label for="instructor">
+    {{item}}
+<input type="checkbox" value="{{item.id}}" id="id_instructor" name="instructor" />
+</label>
+</form>
+{% endfor %}
+
+{% endblock %}

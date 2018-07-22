@@ -1,0 +1,15 @@
+{% extends 'school/school_detail.html'%}
+{% block title %}Документы {{school.title}} {{school.city}}{% endblock %}
+{% block description %}На странице представлены документы автошколы {{school.title}} {{school.city}}{% endblock %}
+{% block detail %}
+   <div class="school-photos container-fluid">
+      <div class="row">
+          {% for item in schooldocument_list %}
+            <div class="col-sm-4 col-xs-6 col-md-4 col-lg-3"><a class="fancybox" rel="group" href="{{item.img.url}}"><img src="{{item.img.url}}" alt="{{item.title}}">{{item.title}}</a></div>
+          {% endfor %}
+      </div>
+   </div>
+{%endblock%}
+{% block reviews%}
+{% endblock %}
+   

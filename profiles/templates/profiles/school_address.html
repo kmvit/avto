@@ -1,0 +1,68 @@
+{% extends 'profiles/profile_detail.html'%}
+{% load static %}
+{% load easy_maps_tags %}
+{% block content %}
+<h1 class="page-title">Адреса</h1>
+<h2><i class="fa fa-map-marker text-muted"></i>Филиалы</h2>
+<p><a href="{%url 'profiles:profile_branch_add' pk=user.id slug=school.slug%}" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Добавить адрес</a></p>
+<table class="table table-hover user-schools">
+   <tbody>
+       {%for item in branch_list%}
+      <tr>
+         <td class="address">
+            <address>{{item.adress}}</address>
+            <p class="phone">{{item.phone_number}}</p>
+         </td>
+         <td class="text-right">
+            <div class="dropdown">
+               <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdown-menu-85960" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">изменить <i class="fa fa-angle-down"></i></button>
+               <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-85960">
+                  <li>
+                     <a href="{%url 'profiles:profile_branch_edit' pk=user.id slug=item.school.slug branch_pk=item.id%}"><i class="fa fa-fw fa-pencil"></i> изменить</a>
+                  </li>
+                  <li role="separator" class="divider"></li>
+                  <li>
+                     <a href="{%url 'profiles:profile_branch_delete' pk=user.id slug=item.school.slug branch_pk=item.id%}"><i class="fa fa-fw fa-times"></i> удалить</a>
+                  </li>
+               </ul>
+            </div>
+         </td>
+      </tr>
+      {%endfor%}
+   </tbody>
+</table>
+<h2><i class="fa fa-road text-muted"></i> Автодромы</h2>
+<p><a href="{%url 'profiles:profile_autodrome_add' pk=user.id slug=school.slug%}" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Добавить автодром</a></p>
+<table class="table table-hover user-schools">
+   <tbody>
+       {%for item in autodrome_list%}
+      <tr>
+         <td class="address">
+            <address>{{item.adress}}</address>
+            <p class="phone">{{item.phone_number}}</p>
+         </td>
+         <td class="text-right">
+            <div class="dropdown">
+               <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdown-menu-85960" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">изменить <i class="fa fa-angle-down"></i></button>
+               <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-85960">
+                  <li role="separator" class="divider"></li>
+                  <li>
+                     <a href="{%url 'profiles:profile_autodrome_edit' pk=user.id slug=item.school.slug autodrome_pk=item.id%}"><i class="fa fa-fw fa-pencil"></i> изменить</a>
+                  </li>
+                  <li role="separator" class="divider"></li>
+                  <li>
+                     <a href="{%url 'profiles:profile_autodrome_delete' pk=user.id slug=item.school.slug autodrome_pk=item.id%}"><i class="fa fa-fw fa-times"></i> удалить</a>
+                  </li>
+               </ul>
+            </div>
+         </td>
+      </tr>
+      {%endfor%}
+   </tbody>
+</table>
+<div class="alert alert-note" role="alert">
+   <p><b>Филиалы</b> - Дополнительные адреса организации с учебными классами. Могут иметь при себе автодромы.</p>
+   <p><b>Автодромы</b> - Автодромы, не имеющие при себе учебных классов.</p>
+</div>
+<p><a href="{%url 'profiles:profile_schools' pk=user.id%}">Назад</a></p>
+{%endblock%}

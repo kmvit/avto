@@ -1,0 +1,28 @@
+<div class="col-sm-3 col-md-3">
+    <ul>
+        {% for item in page_list|slice:":2" %}
+            <li class=""><a href="/{{item.slug}}">{{item.title}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="col-sm-3 col-md-3">
+    <ul>
+        {% for item in page_list|slice:"2:4" %}
+            <li class=""><a href="/{{item.slug}}">{{item.title}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="col-sm-3 col-md-3">
+    <ul>
+        {% for item in page_list|slice:"4:6" %}
+            <li class=""><a href="/{{item.slug}}">{{item.title}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="col-sm-3 col-md-3">
+    <ul>
+        {% for item in page_list|slice:"6:" %}
+            <li class=""><a href="/{{item.slug}}">{{item.title}}</a></li>
+        {% endfor %}
+    </ul>
+</div>

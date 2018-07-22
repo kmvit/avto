@@ -1,0 +1,270 @@
+{% extends 'base.html'%}
+{%load static%}
+{% load thumbnail %}
+{% block title %}Инструктор по вождению г.{{instructor.city}} - {{instructor.fio}}{% endblock %}
+{% block description %} {{instructor.about_you}} {% endblock %}
+{% block content %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/instructor/">Инструкторы</a></li>
+      <li>{{instructor.fio}}</li>
+   </ol>
+</div>
+<div class="school-detail clearfix">
+   <h1 class="page-title">{{instructor.fio}}</h1>
+   <div class="row">
+      <div class="col-lg-2 col-xl-3">
+         <div class="school-logo">
+            {%if instructor.premium%}
+            <div class="stamp">
+               <img src="{% static 'images/provereno.png'%}" alt="{{instructor.fio}}" class="img-responsive center-block"> 
+            </div>
+            {%endif%}
+            <img src="{% if instructor.logo %}{{instructor.logo.url}}{% endif %}" alt="{{instructor.fio}}" class="img-responsive center-block">            
+         </div>
+      </div>
+      <div class="school-data-tip col-lg-3 col-xl-4">
+         <p class="properties time"><i class="fa fa-calendar" aria-hidden="true"></i> Возраст и знак зодиака: </p>
+         <p class="properties">
+            <span class="cat"><i>{{instructor.age}}</i></span>
+            <small>|</small>
+            <span>{{instructor.zodiac}}</span>
+            <small>|</small>
+            <span class="cost">1 час: {{instructor.coast}}руб.</span>  
+         </p>
+         {%if instructor.car_akpp%}
+         <span class="cost time"><i class="fa fa-car" aria-hidden="true"></i></span> <span class="param-no-fuel"> {{instructor.car_akpp}}</span><br>
+         {%endif%}
+         {%if instructor.car_mkpp%}
+         <span class="cost time"><i class="fa fa-car" aria-hidden="true"></i></span> <span class="param-no-fuel"> {{instructor.car_mkpp}}</span><br>
+         {%endif%}
+         {%if instructor.car_mkpp == '' and instructor.car_akpp == ''%}
+         <span class="cost time"><i class="fa fa-car" aria-hidden="true"></i> </span> <span class="param-no-fuel">Нет своего автомобиля</span><br>
+         {%endif%}
+         {%if instructor.car_learner%}
+         <span class="cost time"><i class="fa fa-car" aria-hidden="true"></i> </span> <span class="param-no-fuel">На автомобиле ученика</span><br>
+         {%endif%}
+         <span class="cost time">Стаж:</span><span class="param-no-fuel">{{instructor.experience}} лет</span>
+         <p><span class="cost time">Рейтинг </span></p>
+         <div class="star-ratings">
+            <div class="star-ratings-rating-stars-container">
+               <span class="stars stars{{review_sum}}"></span>
+            </div>
+            {%if instructor.avg_review == None%}
+            <div class="star-ratings-rating-average">Общая оценка: <span class="stars stars">Нет оценок</span></div>
+            {%else%}
+            <div class="star-ratings-rating-average">Общая оценка: <span class="stars stars{{instructor.avg_review|floatformat:"0"}}"></span></div>
+            {%endif%}
+            <div class="star-ratings-rating-count">Количество оценок: <span class="stars stars">{{review_count}}</span></div>
+            <div class="star-ratings-errors"></div>
+         </div>
+      </div>
+      <div class="col-lg-3 col-xl-4 right">
+         <p class="properties">
+            <span class="credo"><i class="fa fa-comment-o" aria-hidden="true"></i> Кредо: <span class="credo-dec">{{instructor.credo}}</span></span>
+            <span class="credo"><i class="fa fa-video-camera" aria-hidden="true"></i> Любимый фильм: <span class="credo-dec">{{instructor.film}}</span></span>
+            {%if instructor.smoke%}
+            <small>|</small>
+            <span><i class="fa fa-minus-circle" aria-hidden="true"></i> Курит</span>
+            {%else%}
+            <small>|</small>
+            <span><i class="fa fa-minus-circle" aria-hidden="true"></i> Не курит</span>
+            {%endif%}<br>
+            <span class="credo"><i class="fa fa-phone" aria-hidden="true"></i> {{instructor.phone_number}}</span>
+         </p>
+         {%if instructor.premium%}
+         <div class="instructor-detail-online-feedback">
+            <a class="modal_feddback" href="#">Онлайн заявка</a>
+         </div>
+         {%endif%}
+      </div>
+   </div>
+   <div class="clearfix"></div>
+   <p class="instructor-about">
+      <span class="credo">О себе: <span class="credo-dec">{{instructor.about_you}}</span></span>
+   </p>
+   <p class="instructor-about">    <span class="credo">О системе обучения: <span class="credo-dec">{{instructor.about_teach}}</span></span></p>
+</div>
+{% if instructor.premium == False %}
+<h2>Рекомендуем инструкторов в г.{{instructor.city}}</h2>
+<div class="block-schools">
+   <div class="list-item row">
+      {% for item in instructor_list|slice:":4" %}
+
+      <div class="block-school">
+         <div class="col-md-3">
+           
+                  <a href="{% url 'instructor:instructordetail' slug=item.slug %}">
+                  <img srcset="{% if item.logo %}{% thumbnail item.logo 150x250 crop %}{% endif %}" alt="{{item.title}}" class="img-responsive center-block instructors-img">                </a>
+                  <h2><a href="{% url 'instructor:instructordetail' slug=item.slug %}">{{item.fio}}</a></h2>
+                 
+
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+</div>
+{% endif %}
+<h2>Отзывы учеников</h2>
+<div class="reviews-list">
+   <div id="insert-review-here"></div>
+   {% for item in review_list %}
+   <div class="panel review-item">
+      <div class="review-heading row">
+         <div class="col-sm-6 meta text-sm-center">
+            <div class="img-circle avatar sprite avatar48"></div>
+            <p class="title h5"><b>{{item.name}}</b></p>
+            <p class="h6 text-muted time">{{item.born}}</p>
+         </div>
+         <div class="col-sm-6 rating text-sm-center text-right">
+            <span class="stars stars{{item.rating}}"></span>
+         </div>
+      </div>
+      <div class="review-description">
+         <p>{{item.body}}</p>
+         <!--<div class="stats">
+            <a href="#" class="btn btn-default stat-item stat-item-up"><i class="fa fa-thumbs-up icon"></i>2</a>
+            <a href="#" class="btn btn-default stat-item stat-item-down"><i class="fa fa-thumbs-down icon"></i>12</a>
+            </div>-->
+      </div>
+      {% for i in item.reviewresponceinstructor_set.all %}
+      <div class="reviewresponse">
+            <p>Ответ инструктора:  {{i.body}}</p>
+         </div>
+      {% endfor %}
+     
+      {% if instructor.premium and instructor.user == user %}
+      <div id="reviewresponce">
+         <form action="{% url 'instructor:reviewresponce' id=item.id%}" method="post" onsubmit="return checkForm(this.elements)">
+             {% csrf_token %}
+            <p><b>Ответить на комментарий:</b></p>
+            <p><textarea rows="2" cols="55" name="text"></textarea></p>
+            <input type="hidden" name="review_id" value="{{item.id}}"/>
+            <p><input type="submit" class="btn btn-primary" value="Отправить"></p>
+        </form>
+    </div>
+      {% endif %}
+   </div>
+   {% endfor %}
+</div>
+<p class="h2 bordered">Оцените инструктора</p>
+<p class="text-center"><a href="{%url 'instructor:reviewinstructoradd' slug=instructor.slug%}">Напишите отзыв об инструкторе</a></p>
+{% endblock %}
+{% block sidebar %}
+<div class="sidebar-articles">
+    <p class="h4">Лучшие инструкторы</p>
+    <hr class="border">
+    {% for item in instructor_list_side_premium|slice:":5" %}
+     {% if item.avg_review != None or item.premium %}
+    <div class="media">
+        <div class="media-left">
+            
+            <a href="{% url 'instructor:instructordetail' slug=item.slug %}">
+                {%if item.premium%}
+            <div class="stamp-list-thumb">
+                <img src="{% static 'images/provereno.png'%}" alt="{{instructor.fio}}" class="img-responsive center-block"> 
+            </div>
+            {%endif%}
+                <img src="{% thumbnail item.logo 100x100 %}" alt="{{item.title}}" class="media-object">
+            </a>
+        </div>
+        
+        <div class="media-body">
+            <p class="title"><a href="{% url 'instructor:instructordetail' slug=item.slug %}">{{item.fio}}</a></p>
+            <div class="block-rating-recommended">
+                    {% if item.premium %}
+                    <span class="stars-pro-wrapper">
+                        <span class="stars stars5"></span>
+                    </span> 
+                    {% elif item.avg_review == None %}
+                    <span class="rating">Нет оценок</span>
+                    {%else%}
+                    <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+                    {%endif%}
+                  </div>
+        </div>
+    </div>
+{% endif%}
+{% endfor %}
+<div id="modal_form_feedback">
+   <h3>Вы делаете правильный выбор!</h3>
+   <div class="comment">Оформите заявку</div>
+   <a class="exit"></a>
+  {% include "instructors/feedback.html" %}
+</div>
+<div id="overlay"></div>
+<script>
+   $(function() { // вся мaгия пoсле зaгрузки стрaницы
+   $('.modal_feddback').click( function(event){ // лoвим клик пo ссылки с class="modal"
+   event.preventDefault(); // выключaем стaндaртную рoль элементa
+   $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
+   function(){ // пoсле выпoлнения предъидущей aнимaции
+   $('#modal_form_feedback') 
+   .css('display', 'block') // убирaем у мoдaльнoгo oкнa display: none;
+   .animate({opacity: 1, top: '50%'}, 200); // плaвнo прибaвляем прoзрaчнoсть oднoвременнo сo съезжaнием вниз
+   });
+   });
+   /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
+   $('.exit, #overlay').click( function(){ // лoвим клик пo крестику или пoдлoжке
+   $('#modal_form_feedback')
+   .animate({opacity: 0, top: '45%'}, 200,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+   	function(){ // пoсле aнимaции
+   	$(this).css('display', 'none'); // делaем ему display: none;
+   	$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+   	}
+   );
+   });
+   $(document).on('af_complete', function(event, response) {
+      if (response.success) { //Если форма заполнена и нет ошибок
+     $('#modal_form_feedback')
+   .animate({opacity: 0, top: '45%'}, 500,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+   	function(){ // пoсле aнимaции
+   	$(this).css('display', 'none'); // делaем ему display: none;
+   	$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+      });
+      }
+      });
+   });
+</script>
+{% for item in instructor_list_side|slice:":5" reversed%}
+      {% if item.premium == False %}
+    <div class="media">
+        <div class="media-left">
+            
+            <a href="{% url 'instructor:instructordetail' slug=item.slug %}">
+                {%if item.premium%}
+            <div class="stamp-list-thumb">
+                <img src="{% static 'images/provereno.png'%}" alt="{{instructor.fio}}" class="img-responsive center-block"> 
+            </div>
+            {%endif%}
+                <img src="{% thumbnail item.logo 100x100 %}" alt="{{item.title}}" class="media-object">
+            </a>
+        </div>
+        
+        <div class="media-body">
+            <p class="title"><a href="{% url 'instructor:instructordetail' slug=item.slug %}">{{item.fio}}</a></p>
+            <div class="block-rating-recommended">
+                    {% if item.premium %}
+                    <span class="stars-pro-wrapper">
+                        <span class="stars stars5"></span>
+                    </span> 
+                    {% elif item.avg_review == None %}
+                    <span class="rating">Нет оценок</span>
+                    {%else%}
+                    <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+                    {%endif%}
+                  </div>
+        </div>
+    </div>
+{% endif%}
+{%endfor%}
+</div>
+<div class="sidebar-articles">
+                     
+                     <p class="h4">Интересные новости</p>
+                     <hr class="border">
+                     {% load news_tags %}
+                     {% news_sidebar %}
+                  </div>
+{% endblock %}

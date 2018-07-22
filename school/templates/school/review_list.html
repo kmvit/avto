@@ -1,0 +1,50 @@
+{% extends 'school/school_detail.html'%}
+{% block title %}Отзывы {{school.title}} {{school.city}}{% endblock %}
+{% block description %}На странице представлены отзывы автошколы {{school.title}} {{school.city}}{% endblock %}
+{% block detail %}
+   <div class="reviews-list">
+      <div id="insert-review-here"></div>
+      {% for item in review_list %}
+      <div class="panel review-item">
+         <div class="review-heading row">
+            <div class="col-sm-6 meta text-sm-center">
+               <div class="img-circle avatar sprite avatar48"></div>
+               <p class="title h5"><b>{{item.name}}</b></p>
+               <p class="h6 text-muted time">{{item.born}}</p>
+            </div>
+            <div class="col-sm-6 rating text-sm-center text-right">
+               <span class="stars stars{{item.rating}}"></span>
+            </div>
+         </div>
+         <div class="review-description">
+            {{item.body}}
+            <!--<div class="stats">
+               <a href="#" class="btn btn-default stat-item stat-item-up"><i class="fa fa-thumbs-up icon"></i>2</a>
+               <a href="#" class="btn btn-default stat-item stat-item-down"><i class="fa fa-thumbs-down icon"></i>12</a>
+               </div>-->
+         </div>
+         {% for i in item.reviewresponce_set.all %}
+      <div class="reviewresponse">
+            <p>Ответ школы:  {{i.body}}</p>
+         </div>
+      {% endfor %}
+     
+      {% if school.premium and school.user == user%}
+      <div id="reviewresponce">
+         <form action="{% url 'school:reviewresponce' id=item.id%}" method="post" onsubmit="return checkForm(this.elements)">
+             {% csrf_token %}
+            <p><b>Ответить на комментарий:</b></p>
+            <p><textarea rows="2" cols="55" name="text"></textarea></p>
+            <input type="hidden" name="review_id" value="{{item.id}}"/>
+            <p><input type="submit" class="btn btn-primary" value="Отправить"></p>
+        </form>
+    </div>
+      {% endif %}
+      </div>
+      {% endfor %}
+   </div>
+   <p class="text-center"><a href="{%url 'school:reviewadd' slug=school.slug%}">Напишите отзыв об автошколе</a></p>
+{% endblock %}
+{% block reviews%}
+{% endblock %}
+   

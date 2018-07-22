@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% block content %}
+                <div class="breadcrumb-holder"><ol class="breadcrumb"><li><a href="/">Главная</a></li></ol></div>                                <h1 class="page-title">Обратная связь</h1>    
+<form action="/feedback/" method="POST" class="form-horizontal">
+    <input type="hidden" name="sessid" id="sessid" value="4769cbdf5cbe89a04e5a940a8cbfc597">    <div class="form-group required">
+        <label for="user_name" class="col-sm-4 control-label">Ваше имя</label>
+        <div class="col-sm-7">
+            <input class="form-control" type="text" name="user_name" value="" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
+        </div>
+    </div>
+    <div class="form-group required">
+        <label for="user_email" class="col-sm-4 control-label">E-mail</label>
+        <div class="col-sm-7">
+            <input class="form-control" type="text" name="user_email" value="" required="">
+        </div>
+    </div>
+
+    <div class="form-group required">
+        <label for="MESSAGE" class="col-sm-4 control-label">Сообщение</label>
+        <div class="col-sm-7">
+            <textarea class="form-control" name="MESSAGE" rows="5" cols="40" required=""></textarea>
+        </div>
+    </div>
+
+            <input type="hidden" name="captcha_sid" value="07c6f859b43030024cfc479302c772cd">
+        <div class="form-group required">
+            <label class="col-sm-4 control-label" for="captcha_word">Код с картинки</label>
+            <div class="col-sm-7">
+                <div class="input-group">
+                    <div class="input-group-addon captcha-addon" style="background:url(/bitrix/tools/captcha.php?captcha_sid=07c6f859b43030024cfc479302c772cd)"></div>
+                    <input required="" type="text" class="form-control" id="captcha_word" name="captcha_word">
+                </div>
+            </div>
+        </div>
+    
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-7 text-sm-center">
+            <input class="btn btn-primary" name="submit" type="submit" value="Отправить">
+        </div>
+    </div>
+
+    <input type="hidden" name="PARAMS_HASH" value="b9bc0c6d2fdb8c6be44de9caa395270f">
+</form>               
+{% endblock %}

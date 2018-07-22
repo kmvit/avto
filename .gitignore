@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+settings_local.py
+db.sqlite3
+
+/avtoenv
+/media
+/static
+/email-local-spool
+*.geany

@@ -1,0 +1,11 @@
+{% load thumbnail %}
+<ul>
+{% for item in category_list %}
+<li>
+    <a href="{% url 'news:news_category' slug=item.slug %}"><img src="{% thumbnail item.img 25x25%}" alt="{{item.title}}" class="media-object"></a>
+    <ul> 
+     <li>{{item.title}}</li> 
+    </ul> 
+</li>
+{% endfor %}
+</ul>

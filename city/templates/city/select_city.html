@@ -1,0 +1,7 @@
+ {% if city %}
+ <li><a href="{% url 'city:city_school_list' slug=city.slug%}">Автошколы</a></li>
+ <li><a href="{% url 'city:city_instructor_list' slug=city.slug%}">Инструкторы</a></li>
+ {% else %}
+  <li><a href="{% url 'school:schoollist' %}">Автошколы</a></li>
+  <li><a href="{% url 'instructor:instructorslist' %}">Инструкторы</a></li>
+  {% endif %}

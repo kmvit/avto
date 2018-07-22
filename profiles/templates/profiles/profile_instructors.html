@@ -1,0 +1,43 @@
+{% extends 'profiles/profile_detail.html'%}
+{% load static %}
+{% block content %}
+<h1 class="page-title">Мои инструкторы</h1>
+<div class="alert alert-success" role="alert">
+   <p>{{request.user.first_name}}! Портал vodibezopasno создан для поиска и сведения частных инструкторов по вождению с потенциальными учениками. Вы хотите обучать больше учеников?! Ознакомьтесь с премиум возможностями сайта.</p>
+   <p><a href="/pages/account-pro/" class="alert-link">Познакомьтесь с возможностями Профессионального аккаунта</a></p>
+</div>
+<p><a href="{%url 'profiles:profile_instructor_add' pk=user.id %}" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Добавить инструктора</a></p>
+<table class="table table-hover user-schools">
+   <tbody>
+      {%for item in instructor_list%}
+      <tr>
+         <td>
+            <p class="h3"><a href="{%url 'profiles:profile_instructors_edit' pk=user.id instructor_pk=item.id%}">{{item.fio}}</a></p>
+            <small>{{item.city}}</small>
+            <ul class="profile-school-button">
+                  {%if item.premium%}
+                  <li><a href="{%url 'instructor:instructordetail' slug=item.slug%}"><i class="fa fa-comment"></i> Ответить на отзывы </a></li>
+                  <li><a href="{%url 'instructor:feedbackinstructor_list' slug=item.slug%}"><i class="fa fa-envelope"></i> Онлайн заявки </a></li>
+                  {%endif%}
+               </ul>
+         </td>
+         <td class="text-right">
+            <div class="dropdown">
+               <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdown-menu-84842" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">изменить <i class="fa fa-angle-down"></i></button>
+               <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-84842">
+                  <li><a href="{%url 'instructor:instructordetail' slug=item.slug%}"><i class="fa fa-fw fa-link"></i> показать на сайте</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="{%url 'profiles:profile_instructors_edit' pk=user.id instructor_pk=item.id%}"><i class="fa fa-fw fa-pencil"></i>изменить</a></li>
+
+               </ul>
+            </div>
+         </td>
+      </tr>
+      {%endfor%}
+   </tbody>
+</table>
+<div class="alert alert-info">
+   <p>Увеличивайте количество положительных отзывов и рейтинг автошколы с помощью промо-материалов, которые мы подготовили специально для вас.</p>
+   <p><a href="/cabinet/promo/" class="alert-link">Узнайте подробности в разделе "Промо"</a></p>
+</div>
+{%endblock%}

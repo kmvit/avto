@@ -1,0 +1,57 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block bread %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="{% url 'profiles:profile_detail' pk=user.id%}">Персональный кабинет</a></li>
+   </ol>
+</div>
+{% endblock %}
+{% block content %}
+<h1 class="page-title">Профиль</h1>
+<h2>Премиум аккаунт</h2>
+<p>Премиум аккаунт сделает Ваши автошколы заметнее, выделит их на сайте, предоставит ряд возможностей, недоступных обычным пользователям.</p>
+<p>Вы сможете оставлять комментарии к отзывам, загружать фотографии и видео об автошколе и многое другое.</p>
+<p class="text-center"><a href="#" class="btn btn-link">Узнать больше</a> <span class="btn-fake ">или</span> &nbsp; <a href="#" class="btn btn-primary">Получить Премиум</a></p>
+<p>Если вы нашли свою автошколу, то напишите нам на <a href="mailto:muzgruzim@mail.ru">почту</a> с указанием названия автошколы.</p>
+{% endblock %}
+{% block cabinet %} 
+<div class="card">
+  <!-- <div class="cardheader">
+      <img class="image" src="{% static 'images/nobg.png'%}">
+   </div> 
+   <div class="cardavatar">
+      <div class="avatar">
+           {%if request.user.profile.avatar%}
+            <img src="{{request.user.profile.avatar.url}}" class="image">
+          {%else%}
+            <img src="{%static 'images/avatar.png'%}" class="image">
+          {%endif%}
+      </div>
+   </div>-->
+   <div class="info">
+      <p class="h3 title"><a href="{% url 'profiles:profile_detail' pk=user.id%}">{{user.first_name}} {{user.last_name}}</a></p>
+      <p class="desc"></p>
+   </div>
+   <ul class="nav">
+       {%if user.profile.premium == False%}
+      <li class="premium-button"><a href="http://vodibezopasno.com/profile/2/"><i class="fa fa-fw fa-star"></i> &nbsp;Получить премиум </a></li>
+      {% endif %}
+      <li class=""><a href="{% url 'profiles:profile_update' pk=user.id%}"><i class="fa fa-fw fa-pencil-square-o"></i> &nbsp;Профиль </a></li>
+      {%if user.profile.status == '2'%}
+      <li class=""><a href="{% url 'profiles:profile_schools' pk=user.id%}"><i class="fa fa-fw fa-map-marker"></i> &nbsp;Мои автошколы </a></li>
+      {%else%}
+      <li class=""><a href="{% url 'profiles:profile_instructors' pk=user.id%}"><i class="fa fa-fw fa-map-marker"></i> &nbsp;Я инструктор </a></li>
+      {%endif%}
+      {%if user.profile.status == '2'%}
+      <li class=""><a href="{% url 'profiles:profile_bill_add' pk=user.id%}"><i class="fa fa-fw fa-money"></i> &nbsp;Получить счет </a></li>
+      {% else %}
+      {% endif %}
+ 
+      <li class=""><a href="{% url 'news:news_add' %}"><i class="fa fa-fw fa-pencil-square-o"></i> &nbsp;Предложить новость </a></li>
+      <li class=""><a href="{% url 'articles:article_add' %}"><i class="fa fa-fw fa-pencil-square-o"></i> &nbsp;Предложить статью </a></li>
+      <li class=""><a href="{% url 'school:document_list'%}"><i class="fa fa-fw fa-book"></i> &nbsp;Скачать документы </a></li>
+   </ul>
+</div>
+{% endblock %}

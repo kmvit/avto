@@ -1,0 +1,226 @@
+{% extends 'base.html'%}
+{% block content %}
+                <div class="breadcrumb-holder"><ol class="breadcrumb"><li><a href="/">Автобегиннер.ру</a></li><li><a href="/cabinet/">Персональный кабинет</a></li><li><a href="/cabinet/driving-schools/">Автошколы</a></li></ol></div>                                <h1 class="page-title">Новая автошкола</h1>    
+<div class="nav-wizard">
+    <div class="col-xs-6 nav-wizard-step active">
+        <div class="progress"><div class="progress-bar"></div></div>
+        <div class="nav-wizard-dot">1</div>
+    </div>
+
+    <div class="col-xs-6 nav-wizard-step ">
+        <div class="progress"><div class="progress-bar"></div></div>
+        <div class="nav-wizard-dot">2</div>
+        <div class="nav-wizard-dot-last">3</div>
+    </div>
+</div>
+        <h2>Данные автошколы</h2>
+        <form method="post" enctype="multipart/form-data" action="/cabinet/driving-schools/new/" class="address-form form-horizontal" novalidate="novalidate">
+            <fieldset>
+                <input type="hidden" name="STEP" value="1">
+                <div class="form-group required" aria-required="true">
+                    <label class="col-sm-4 control-label" for="REGION">Регион</label>
+                    <div class="col-sm-8">
+                        <select required="" class="form-control" id="REGION" name="REGION" aria-required="true" aria-invalid="false">
+                                                            <option value="1">01. Республика Адыгея</option>
+                                                                <option value="2">02. Республика Башкортостан</option>
+                                                                <option value="3">03. Республика Бурятия</option>
+                                                                <option value="4">04. Республика Алтай</option>
+                                                                <option value="5">05. Республика Дагестан</option>
+                                                                <option value="6">06. Республика Ингушетия</option>
+                                                                <option value="7">07. Кабардино-Балкарская Республика</option>
+                                                                <option value="8">08. Республика Калмыкия</option>
+                                                                <option value="9">09. Карачаево-Черкесская Республика</option>
+                                                                <option value="10">10. Республика Карелия</option>
+                                                                <option value="11">11. Республика Коми</option>
+                                                                <option value="12">12. Республика Марий-Эл</option>
+                                                                <option value="13">13. Мордовская Республика</option>
+                                                                <option value="80">14. Республика Саха (Якутия)</option>
+                                                                <option value="14">15. Республика Северная Осетия</option>
+                                                                <option value="15">16. Республика Татарстан</option>
+                                                                <option value="16">17. Республика Тыва</option>
+                                                                <option value="17">18. Удмуртская Республика</option>
+                                                                <option value="18">19. Республика Хакасия</option>
+                                                                <option value="19">20. Чеченская Республика</option>
+                                                                <option value="20">21. Чувашская Республика</option>
+                                                                <option value="21">22. Алтайский край</option>
+                                                                <option value="23">23. Краснодарский край</option>
+                                                                <option value="24">24. Красноярский край</option>
+                                                                <option value="25">25. Приморский край</option>
+                                                                <option value="26">26. Ставропольский край</option>
+                                                                <option value="27">27. Хабаровский край</option>
+                                                                <option value="28">28. Амурская область</option>
+                                                                <option value="29">29. Архангельская область</option>
+                                                                <option value="30">30. Астраханская область</option>
+                                                                <option value="31">31. Белгородская область</option>
+                                                                <option value="32">32. Брянская область</option>
+                                                                <option value="33">33. Владимирская область</option>
+                                                                <option value="34">34. Волгоградская область</option>
+                                                                <option value="35">35. Вологодская область</option>
+                                                                <option value="36">36. Воронежская область</option>
+                                                                <option value="37">37. Ивановская область</option>
+                                                                <option value="38">38. Иркутская область</option>
+                                                                <option value="39">39. Калининградская область</option>
+                                                                <option value="40">40. Калужская область</option>
+                                                                <option value="41">41. Камчатский край</option>
+                                                                <option value="42">42. Кемеровская область</option>
+                                                                <option value="43">43. Кировская область</option>
+                                                                <option value="44">44. Костромская область</option>
+                                                                <option value="45">45. Курганская область</option>
+                                                                <option value="46">46. Курская область</option>
+                                                                <option value="47">47. Ленинградская область</option>
+                                                                <option value="48">48. Липецкая область</option>
+                                                                <option value="49">49. Магаданская область</option>
+                                                                <option value="50">50. Московская область</option>
+                                                                <option value="51">51. Мурманская область</option>
+                                                                <option value="52">52. Нижегородская область</option>
+                                                                <option value="22">53. Новгородская область</option>
+                                                                <option value="53">54. Новосибирская область</option>
+                                                                <option value="81">55. Омская область</option>
+                                                                <option value="54">56. Оренбургская область</option>
+                                                                <option value="55">57. Орловская область</option>
+                                                                <option value="56">58. Пензенская область</option>
+                                                                <option value="57">59. Пермский край</option>
+                                                                <option value="58">60. Псковская область</option>
+                                                                <option value="59">61. Ростовская область</option>
+                                                                <option value="60">62. Рязанская область</option>
+                                                                <option value="61">63. Самарская область</option>
+                                                                <option value="62">64. Саратовская область</option>
+                                                                <option value="63">65. Сахалинская область</option>
+                                                                <option value="64">66. Свердловская область</option>
+                                                                <option value="65">67. Смоленская область</option>
+                                                                <option value="66">68. Тамбовская область</option>
+                                                                <option value="67">69. Тверская область</option>
+                                                                <option value="68">70. Томская область</option>
+                                                                <option value="69">71. Тульская область</option>
+                                                                <option value="70">72. Тюменская область</option>
+                                                                <option value="71">73. Ульяновская область</option>
+                                                                <option value="72">74. Челябинская область</option>
+                                                                <option value="73">75. Забайкальский край</option>
+                                                                <option value="74">76. Ярославская область</option>
+                                                                <option value="82" selected="selected">77. Москва</option>
+                                                                <option value="83">78. Санкт-Петербург</option>
+                                                                <option value="75">79. Еврейская автономная область</option>
+                                                                <option value="149">82. Республика Крым</option>
+                                                                <option value="76">83. Ненецкий АО</option>
+                                                                <option value="77">86. Ханты-Мансийский АО - Югра</option>
+                                                                <option value="78">87. Чукотский АО</option>
+                                                                <option value="79">89. Ямало-Ненецкий АО</option>
+                                                                <option value="148">92. Севастополь</option>
+                                                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group required" aria-required="true">
+                    <label class="col-sm-4 control-label" for="NAME">Название</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" id="NAME" name="NAME" type="text" value="" style="cursor: auto; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="SITE">Адрес сайта</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" id="SITE" name="SITE" type="url" value="" placeholder="http://">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="cost">Стоимость обучения</label>
+                    <div class="col-sm-4">
+                        <div class="input-group input-spinner">
+                            <input class="form-control form-spinner" id="COST" name="COST" type="text" value="0" data-step="1000" data-min="0" data-max="100000" data-force-step="false">
+                            <div class="input-group-addon">₽</div>
+                        <div class="input-spinner-btn"><button class="btn btn-default" type="button" data-type="inc"><i class="fa fa-chevron-up"></i></button><button class="btn btn-default" type="button" data-type="dec"><i class="fa fa-chevron-down"></i></button></div></div>
+                    </div>
+                    <div class="col-sm-4 checkbox">
+                                                    <label><input type="checkbox" id="COST_WO_FUEL" name="COST_WO_FUEL" value="56">
+                                с учетом ГСМ</label>
+                                                </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="DURATION">Срок обучения</label>
+                    <div class="col-sm-4">
+                        <div class="input-group input-spinner">
+                            <input class="form-control form-spinner" id="DURATION" name="DURATION" type="text" value="1" data-step="0.5" data-min="1" data-max="10" data-decimals="1">
+                            <div class="input-group-addon">мес.</div>
+                        <div class="input-spinner-btn"><button class="btn btn-default" type="button" data-type="inc"><i class="fa fa-chevron-up"></i></button><button class="btn btn-default" type="button" data-type="dec"><i class="fa fa-chevron-down"></i></button></div></div>
+                    </div>
+                </div>
+
+                <div class="form-group required" aria-required="true">
+                    <label class="col-sm-4 control-label" for="CATEGORIES">Категории обучения</label>
+                    <div class="col-sm-8">
+                        <div class="checkbox row">
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_5"><input type="checkbox" id="CATEGORY_5" name="CATEGORIES[]" value="5"> A                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_66"><input type="checkbox" id="CATEGORY_66" name="CATEGORIES[]" value="66"> A1                                </label></div>
+                            </div>
+                        <div class="checkbox row">                            <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_6"><input type="checkbox" id="CATEGORY_6" name="CATEGORIES[]" value="6"> B                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_68"><input type="checkbox" id="CATEGORY_68" name="CATEGORIES[]" value="68"> B1                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_67"><input type="checkbox" id="CATEGORY_67" name="CATEGORIES[]" value="67"> BE                                </label></div>
+                            </div>
+                        <div class="checkbox row">                            <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_7"><input type="checkbox" id="CATEGORY_7" name="CATEGORIES[]" value="7"> C                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_70"><input type="checkbox" id="CATEGORY_70" name="CATEGORIES[]" value="70"> C1                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_69"><input type="checkbox" id="CATEGORY_69" name="CATEGORIES[]" value="69"> CE                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_71"><input type="checkbox" id="CATEGORY_71" name="CATEGORIES[]" value="71"> C1Е                                </label></div>
+                            </div>
+                        <div class="checkbox row">                            <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_8"><input type="checkbox" id="CATEGORY_8" name="CATEGORIES[]" value="8"> D                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_73"><input type="checkbox" id="CATEGORY_73" name="CATEGORIES[]" value="73"> D1                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_72"><input type="checkbox" id="CATEGORY_72" name="CATEGORIES[]" value="72"> DЕ                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_74"><input type="checkbox" id="CATEGORY_74" name="CATEGORIES[]" value="74"> D1E                                </label></div>
+                            </div>
+                        <div class="checkbox row">                            <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_9"><input type="checkbox" id="CATEGORY_9" name="CATEGORIES[]" value="9"> E                                </label></div>
+                            </div>
+                        <div class="checkbox row">                            <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_75"><input type="checkbox" id="CATEGORY_75" name="CATEGORIES[]" value="75"> M                                </label></div>
+                            </div>
+                        <div class="checkbox row">                            <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_76"><input type="checkbox" id="CATEGORY_76" name="CATEGORIES[]" value="76"> Tm                                </label></div>
+                                                        <div class="col-xs-3 col-sm-2"><label class="radio-label" for="CATEGORY_77"><input type="checkbox" id="CATEGORY_77" name="CATEGORIES[]" value="77"> Tb                                </label></div>
+                                                    </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="SERVICES">Дополнительно</label>
+                    <div class="col-sm-8">
+                        <div class="checkbox row">
+                                                            <div class="col-xs-6"><label class="radio-label" for="PHOTOGRAPHER"><input type="checkbox" id="PHOTOGRAPHER" name="PHOTOGRAPHER" value="3">
+                                        Фотограф</label></div>
+                                                                <div class="col-xs-6"><label class="radio-label" for="ONLINE"><input type="checkbox" id="ONLINE" name="ONLINE" value="89">
+                                        Онлайн-обучение</label></div>
+                                                        </div>
+                        <div class="checkbox row">
+                                                            <div class="col-xs-6"><label class="radio-label" for="MEDICAL"><input type="checkbox" id="MEDICAL" name="MEDICAL" value="4">
+                                        Медкомиссия</label></div>
+                                                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <button class="btn btn-primary" type="submit">Дальше&nbsp; <i class="fa fa-chevron-circle-right"></i></button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+                    {%endblock%}
+			{% block cabinet %} 
+<div class="card">
+		                    <div class="cardheader">
+                    <img class="image" src="/local/templates/bootstrap/images/nobg.png">
+                </div>
+                <div class="cardavatar">
+                    <div class="avatar">
+                        <div class="image sprite director96"></div>
+                    </div>
+                </div>
+                		    <div class="info">
+			    <p class="h3 title"><a href="/cabinet/">Евгений Плаксицкий</a></p>
+			    <p class="desc"></p>
+                		    </div>
+            <ul class="nav">
+    <li class=""><a href="/cabinet/profile/"><i class="fa fa-fw fa-pencil-square-o"></i> &nbsp;Профиль </a></li>
+    <li class=""><a href="/cabinet/driving-schools/"><i class="fa fa-fw fa-map-marker"></i> &nbsp;Автошколы </a></li>
+    <li class=""><a href="/cabinet/bills/"><i class="fa fa-fw fa-money"></i> &nbsp;Счета </a></li>
+    <li class=""><a href="/cabinet/premium/"><i class="fa fa-fw fa-star"></i> &nbsp;Премиум </a></li>
+</ul>	    </div>
+{% endblock %}	   

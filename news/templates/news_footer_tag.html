@@ -1,0 +1,9 @@
+{% for item in news %}
+<div class="block-item col-md-4 col-sm-12 col-xs-12">
+   <a href="{% url 'news:newsdetail' slug=item.slug %}">
+   <img src="{{item.pict.url}}" alt="{{item.title}}" class="img-responsive center-block">
+   </a>
+   <h2><a href="{% url 'news:newsdetail' slug=item.slug %}">{{item.title}}</a></h2>
+   <p class="date">{{item.born}}</p>
+</div>
+{% endfor %}

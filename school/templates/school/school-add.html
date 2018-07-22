@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+{% block content %}
+                <div class="breadcrumb-holder"><ol class="breadcrumb"><li><a href="/">Автобегиннер.ру</a></li><li><a href="/cabinet/">Персональный кабинет</a></li></ol></div>                                <h1 class="page-title">Мои автошколы</h1>    
+<div class="alert alert-success" role="alert"><p>Евгений! Узнайте, как Автобегиннер помогает продвигать автошколу и получать больше учеников.</p><p><a href="/pages/account-pro/" class="alert-link">Познакомьтесь с возможностями Профессионального аккаунта</a></p></div>
+<p><a href="/cabinet/driving-schools/new/" class="btn btn-sm btn-success"><i class="fa fa-plus-circle"></i> Добавить автошколу</a></p>
+
+<table class="table table-hover user-schools">
+    </table>
+
+    <h4>Не отображаются на сайте</h4>
+    <table class="table table-hover user-schools">
+                    <tbody><tr class="hidden-school">
+                <td>
+                    <p class="h4"><a href="/cabinet/driving-schools/edit/?id=84842">Автошкола-2</a>
+                    </p>
+                    <small>Ставропольский край</small>
+                </td>
+                <td class="text-right">
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdown-menu-84842" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">изменить <i class="fa fa-angle-down"></i></button>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu-84842">
+                            <li><a href="/cabinet/driving-schools/edit/?id=84842"><i class="fa fa-fw fa-pencil"></i> изменить</a></li>
+                            <li><a href="/cabinet/driving-schools/addresses/?id=84842"><i class="fa fa-fw fa-map-marker"></i> адреса</a></li>
+                            <li><a href="/cabinet/driving-schools/photo/?id=84842"><i class="fa fa-fw fa-picture-o"></i> фото</a></li>
+                            <li><a href="/cabinet/driving-schools/video/?id=84842"><i class="fa fa-fw fa-youtube"></i> видео</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/cabinet/driving-schools/visible/?id=84842&amp;v=Y"><i class="fa fa-fw fa-eye"></i> показать</a></li>
+                        </ul>
+                    </div>
+                                    </td>
+            </tr>
+                </tbody></table>
+    
+<div class="alert alert-info"><p>Увеличивайте количество положительных отзывов и рейтинг автошколы с помощью промо-материалов, которые мы подготовили специально для вас.</p><p><a href="/cabinet/promo/" class="alert-link">Узнайте подробности в разделе "Промо"</a></p></div>
+              
+				
+			{%endblock%}
+			{% block cabinet %} 
+<div class="card">
+		                    <div class="cardheader">
+                    <img class="image" src="/local/templates/bootstrap/images/nobg.png">
+                </div>
+                <div class="cardavatar">
+                    <div class="avatar">
+                        <div class="image sprite director96"></div>
+                    </div>
+                </div>
+                		    <div class="info">
+			    <p class="h3 title"><a href="/cabinet/">Евгений Плаксицкий</a></p>
+			    <p class="desc"></p>
+                		    </div>
+            <ul class="nav">
+    <li class=""><a href="/cabinet/profile/"><i class="fa fa-fw fa-pencil-square-o"></i> &nbsp;Профиль </a></li>
+    <li class=""><a href="/cabinet/driving-schools/"><i class="fa fa-fw fa-map-marker"></i> &nbsp;Автошколы </a></li>
+    <li class=""><a href="/cabinet/bills/"><i class="fa fa-fw fa-money"></i> &nbsp;Счета </a></li>
+    <li class=""><a href="/cabinet/premium/"><i class="fa fa-fw fa-star"></i> &nbsp;Премиум </a></li>
+</ul>	    </div>
+{% endblock %}	   

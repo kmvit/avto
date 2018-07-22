@@ -1,0 +1,126 @@
+{% extends 'base.html'%}
+{% block content %}
+                <div class="breadcrumb-holder"><ol class="breadcrumb"><li><a href="/">Автобегиннер.ру</a></li><li><a href="/cabinet/">Персональный кабинет</a></li></ol></div>                                <h1 class="page-title">Профиль</h1>        <form name="reg" class="form-horizontal profile-form" method="post" enctype="multipart/form-data" action="/cabinet/profile/">
+        <fieldset>
+            <input type="hidden" name="MAX_FILE_SIZE" value="2048000">
+
+            <div class="form-group required">
+                <label class="col-sm-4 control-label" for="email">E-mail</label>
+                <div class="col-sm-7">
+                    <input required="" class="form-control" id="email" name="email" type="email" value="406036@mail.ru" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-sm-4 control-label" for="surname">Фамилия</label>
+                <div class="col-sm-7">
+                    <input required="" class="form-control" id="surname" name="surname" type="text" value="Плаксицкий">
+                </div>
+            </div>
+            <div class="form-group required">
+                <label class="col-sm-4 control-label" for="name">Имя</label>
+                <div class="col-sm-7">
+                    <input required="" class="form-control" id="name" name="name" type="text" value="Евгений">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="lastname">Отчество</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="lastname" name="lastname" type="text" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="post">Должность</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="post" name="post" type="text" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="photo">Фото</label>
+                <div class="col-sm-7">
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="sprite director96 img-circle img-placeholder"></div>                        </div>
+                        <div class="media-body">
+                            <div class="input-group">
+                                <input type="text" class="form-control" readonly="">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-default btn-file">
+                                        <i class="fa fa-picture-o"></i> Выбрать… <input type="file" id="photo" name="photo">
+                                    </span>
+                                </span>
+                            </div>
+                            <p class="help-block">134×134 пикселей, размер не более 200 Кб</p>
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="notify">Уведомления о новых отзывах</label>
+                <div class="col-sm-7">
+                    <div class="radio">
+                        <label><input type="radio" name="notify" value="0" checked="checked"> выключены</label>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="notify" value="2"> о каждом отзыве</label>
+                        </div>
+                        <div class="radio">
+                        <label><input type="radio" name="notify" value="3"> обзор за день</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-7">
+                    <input class="btn btn-primary" type="submit" value="Сохранить">
+                </div>
+            </div>
+
+
+            <h2>Изменить пароль</h2>
+            <div class="alert alert-info" role="alert"><p>Если вы хотите изменить пароль, введите пароль и подтверждение ниже.</p><p>Чтобы сохранить текущий пароль — оставьте поля пустыми</p></div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="password1">Новый пароль</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="password1" name="password1" type="password" style="cursor: auto; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="password2">Новый пароль (повторно)</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="password2" name="password2" type="password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-7">
+                    <input class="btn btn-primary" type="submit" value="Сохранить">
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+    
+       {% endblock %}   
+{% block cabinet %} 
+<div class="card">
+		                    <div class="cardheader">
+                    <img class="image" src="/local/templates/bootstrap/images/nobg.png">
+                </div>
+                <div class="cardavatar">
+                    <div class="avatar">
+                        <div class="image sprite director96"></div>
+                    </div>
+                </div>
+                		    <div class="info">
+			    <p class="h3 title"><a href="/cabinet/">Евгений Плаксицкий</a></p>
+			    <p class="desc"></p>
+                		    </div>
+            <ul class="nav">
+    <li class=""><a href="/cabinet/profile/"><i class="fa fa-fw fa-pencil-square-o"></i> &nbsp;Профиль </a></li>
+    <li class=""><a href="/cabinet/driving-schools/"><i class="fa fa-fw fa-map-marker"></i> &nbsp;Автошколы </a></li>
+    <li class=""><a href="/cabinet/bills/"><i class="fa fa-fw fa-money"></i> &nbsp;Счета </a></li>
+    <li class=""><a href="/cabinet/premium/"><i class="fa fa-fw fa-star"></i> &nbsp;Премиум </a></li>
+</ul>	    </div>
+{% endblock %}	   

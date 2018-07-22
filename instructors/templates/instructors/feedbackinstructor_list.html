@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block content %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/school/">Автошколы</a></li>
+      <li>Заявки</li>
+   </ol>
+</div>
+<h1 class="page-title">Ваши заявки</h1>
+
+{% if object_list %}
+<tbody>
+    <table class="table">
+    <thead>
+        <tr>
+            <td>
+                Имя
+            </td>
+            <td>
+                Телефон
+            </td>
+             <td>
+                Дата
+            </td>
+        </tr>
+        <tr>
+            {% for item in object_list %}
+            <td>
+                {{item}}
+            </td>
+            <td>
+                {{item.phone}}
+            </td>
+            <td>
+                {{item.created_at}}
+            </td>
+        </tr>
+        {% endfor %}
+        </thead>
+    </table>
+</tbody>
+{% else %}
+<p>На данный момент у вас нет заявок.</p>
+{% endif %}
+{% endblock %}

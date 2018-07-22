@@ -1,0 +1,103 @@
+{% extends 'quiz/quiz_base.html' %}
+{% block title %}штрафы ГИБДД онлайн, Водибезопасно{% endblock %}
+{% block content %}
+<h1 class="news__h1">Все штрафы ГИБДД России</h1>
+<div class="line news__line"></div>
+<div class="row">
+   {% for item in fine_category_list %}
+   <h2 id="common{{forloop.counter}}">{{item.title}}</h2>
+   <div class="row">
+      <div class="col-md-3">
+         <span>Статья КоАП</span>
+      </div>
+      <div class="col-md-6">
+         <span>Нарушение</span>
+      </div>
+      <div class="col-md-3">
+         <span>Санкции</span>
+      </div>
+   </div>
+   <hr class="pdd">
+   {% for i in item.fine_set.all %}
+   <div class="row">
+    <a href="#hide{{i.id}}" class="hiden" id="hide{{i.id}}">+</a>
+    <a href="#show{{i.id}}" class="showen" id="show{{i.id}}">-</a>
+    <div class="question">
+        
+      <div class="col-md-3">
+         <span>{{i.article|safe}}</span>
+      </div>
+           <div class="col-md-6">
+         {{i.title}}
+
+    </div>
+      <div class="col-md-3">
+         <span>{{i.sanction}}</span>
+      </div>
+      </div>
+    <div class="listen">
+    <div class="col-md-3">
+
+      </div>
+            <p> <div class="col-md-6">
+         {{i.offence|safe}}
+
+    </div></p>
+    <div class="col-md-3">
+
+      </div>
+        </div>
+   </div>
+    <hr class="pdd">
+   {% endfor %}
+   {% endfor %}
+</div>
+{% endblock %}
+{% block sidebar%}
+<div id="aside" class="au-grid au-grid-right">
+   <div class="au-affix affix-top" style="width: 314px;">
+      <h2 class="au-affix__header">Разделы</h2>
+      <div class="au-affix__content">
+         <ul class="nav au-affix__list">
+             {% for item in fine_category_list %}
+            <li>
+                <a href="#common{{forloop.counter}}">{{item.title}}</a>
+            </li>
+         {% endfor %}
+         </ul>
+      </div>
+   </div>
+</div>
+<script>
+var elementPosition = $('.au-affix').offset();
+$( document ).ready( function () {
+$(window).scroll(function(){
+        if($(window).scrollTop() > elementPosition.top){
+              $('.au-affix').css('position','fixed').css('top','0');
+        } else {
+            $('.au-affix').css('position','static');
+        }    
+});
+ } );
+</script>
+<script>
+   var menu = document.querySelector('.au-affix');
+   
+   menu.onclick = function(e) {
+   	if (e.target.tagName.toLowerCase() != 'a') return;
+   
+   	[].forEach.call(menu.querySelectorAll('a'), function(item) {
+   		item.classList.remove('active');
+   	});
+   
+   	e.target.classList.add('active');
+   };
+</script>
+<style>
+   .active {
+   background: #aaa;
+   }
+</style>
+{% endblock%}
+
+

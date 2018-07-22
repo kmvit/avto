@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% load article_tags %}
+{% load thumbnail %}
+{% block title %} Вопрос от {{faq}}{% endblock %}
+{% block description %}Вопрос от {{faq}}{% endblock %}
+{% block hovercontainer%}
+<div class="covercontainer" style="background-image:url({% thumbnail article.pict 1600x1600 crop%});">
+   <div class="container sitecontainer">
+      <div class="row">
+         <div class="col-md-8 col-lg-8 col-xl-9">
+            <div class="cover-meta">
+               <div class="breadcrumb-holder">
+                  <ol class="breadcrumb">
+                     <li><a href="/">Главная</a></li>
+                     <li><a href="/articles/">Статьи</a></li>
+                  </ol>
+               </div>
+               <h1 class="page-title">{{faq.question|safe}}</h1>
+               <div class="mini-menu">
+                  <span><i class="fa fa-clock-o"></i> {{faq.born}}</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+{% block content %}
+<article class="article">
+   {{faq.answer|safe}}
+   <div class="backcontainer">
+      <div class="row">
+         <div class="col-md-4 text-md-center">
+            <p><a href="/article/faq"><i class="fa fa-angle-left"></i> Вопросы</a></p>
+         </div>
+      </div>
+   </div>
+</article>
+{% endblock %}

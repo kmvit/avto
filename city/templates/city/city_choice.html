@@ -1,0 +1,15 @@
+ <div id="modal_form1">
+     {% if city %}
+      <p class=title>Ваш город {{city.title}}</p>
+     {% else %}
+      <p class=title>Начните ввод или выберите из списка</p>
+     {% endif %}
+   
+        <form action="{% url 'city:redirect_city' %}">
+            <p>{{ form.school_town }}</p>
+            <input type="submit" id="sub" value="Выбрать"/>
+        </form>
+    
+</div>
+<div id="overlay"></div>
+{{ form.media }}

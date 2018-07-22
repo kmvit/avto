@@ -1,0 +1,42 @@
+{% extends 'profiles/profile_detail.html'%}
+{% load static %}
+{% block content %}
+<h1 class="page-title">Профиль</h1>
+<form name="reg" class="address-form form-horizontal profile-form" method="post" enctype="multipart/form-data" action="">
+   {% csrf_token %}
+   <fieldset>
+       {%for field in user_form%}
+       <div class="form-group required">
+       {{field.error}}
+        <div class="col-sm-4">
+        {{ field.label_tag }}
+        </div>
+        <div class="col-sm-7">
+       {{field}}
+       </div>
+       </div>
+       {%endfor%}
+
+      {%for field in profile_form%}
+       <div class="form-group required">
+       {{field.error}}
+        <div class="col-sm-4">
+        {{ field.label_tag }}
+        </div>
+        <div class="col-sm-7">
+       {{field}}
+       </div>
+       </div>
+       {%endfor%}
+
+      <a href="{% url 'account_change_password' %}">Сменить пароль</a>  
+      
+      <div class="form-group">
+         <div class="col-sm-offset-4 col-sm-7">
+            <input class="btn btn-primary" type="submit" value="Сохранить">
+         </div>
+      </div>
+   </fieldset>
+</form>
+{% endblock %}
+

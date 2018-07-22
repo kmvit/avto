@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-3">
+        <ul class="footer-city-menu">    
+    {% for item in city_list|slice:":7" %}
+        <li><a href="{% url 'city:city_school_list' slug=item.slug %}">{{item.title}}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+     <div class="col-md-3">
+        <ul class="footer-city-menu">    
+    {% for item in city_list|slice:"7:14" %}
+        <li><a href="{% url 'city:city_school_list' slug=item.slug %}">{{item.title}}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+     <div class="col-md-3">
+        <ul class="footer-city-menu">    
+    {% for item in city_list|slice:"14:21" %}
+        <li><a href="{% url 'city:city_school_list' slug=item.slug %}">{{item.title}}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+     <div class="col-md-3">
+        <ul class="footer-city-menu">    
+    {% for item in city_list|slice:"21:28" %}
+        <li><a href="{% url 'city:city_school_list' slug=item.slug %}">{{item.title}}</a></li>
+    {% endfor %}
+    </ul>
+    </div>
+</div>

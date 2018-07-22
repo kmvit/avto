@@ -1,0 +1,92 @@
+{% extends 'base.html'%}
+{% load article_tags %}
+{% load static watermark %}
+{% load thumbnail %}
+{% block title %} Статьи, {{article.title}}{% endblock %}
+{% block description %}Статьи, {{article.title}}}{% endblock %}
+{% block hovercontainer%}
+<div class="covercontainer" style="background-image:url({% thumbnail article.pict 1600x1600 crop%});">
+   <div class="container sitecontainer">
+      <div class="row">
+         <div class="col-md-8 col-lg-8 col-xl-9">
+            <div class="cover-meta">
+               <a class="item-category tuning" href="{% url 'articles:category_detail' slug=article.category.slug %}">{{article.category}}</a>
+               <div class="breadcrumb-holder">
+                  <ol class="breadcrumb">
+                     <li><a href="/">Главная</a></li>
+                     <li><a href="/article/">Статьи</a></li>
+                  </ol>
+               </div>
+               <h1 class="page-title">{{article.title}}</h1>
+               <div class="mini-menu">
+                  <span><i class="fa fa-clock-o"></i> {{article.born}}</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="flexslider">
+          <ul class="slides">
+                <li>
+  	    	    <img src="{{ article.pict.url|watermark:"logo,position=br,opacity=35" }}" />
+  	    		</li>
+  	    		{% if article.pict1 %}
+                <li><img src="{{article.pict1.url|watermark:"logo,position=br,opacity=35"}}" alt="2"></li>
+                {% endif %}
+                {% if article.pict2 %}
+                <li><img src="{{article.pict2.url|watermark:"logo,position=br,opacity=35"}}" alt="3"></li>
+                {% endif %}
+                {% if article.pict3 %}
+                <li><img src="{{article.pict3.url|watermark:"logo,position=br,opacity=35"}}" alt="4"></li>
+                {% endif %}
+                {% if article.pict4 %}
+                <li><img src="{{article.pict4.url|watermark:"logo,position=br,opacity=35"}}" alt="5"></li>
+                {% endif %}
+          </ul>
+        </div>
+    <script type="text/javascript">
+    $(function(){
+      SyntaxHighlighter.all();
+    });
+    $(window).load(function(){
+      $('.flexslider').flexslider({
+        animation: "slide",
+        start: function(slider){
+          $('body').removeClass('loading');
+        }
+      });
+    });
+    </script>
+<article class="article">
+   
+   {{article.body|safe}}
+   <div class="backcontainer">
+      <div class="row">
+         <div class="col-md-4 text-md-center">
+            <p><a href="/article/"><i class="fa fa-angle-left"></i> Статьи</a></p>
+         </div>
+         <div class="col-md-8 text-md-center text-right">
+            <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+            <script src="//yastatic.net/share2/share.js"></script>
+            <div class="ya-share2" data-services="collections,vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+         </div>
+      </div>
+   </div>
+</article>
+<h2>Читайте также</h2>
+<hr class="border">
+<div class="row blocks">
+    {% for item in article_list|slice:":9" %}
+    <div class="block-item col-md-4 col-sm-12 col-xs-12">
+        <a href="{% url 'articles:article_detail' slug=item.slug category_slug=item.category.slug %}">
+            <img src="{% thumbnail item.pict 320x196 crop %}" alt="{{item.title}}" class="img-responsive center-block">
+        </a>
+        <h2><a href="{% url 'articles:article_detail' slug=item.slug category_slug=item.category.slug %}">{{item.title}}</a></h2>
+        <p class="date">{{item.born}}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

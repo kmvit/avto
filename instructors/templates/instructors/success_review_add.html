@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block content %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/school/">Инструкторы</a></li>
+      <li>{{instructor.fio}}</li>
+   </ol>
+</div>
+<h1 class="page-title">Спасибо {{review.name}}, ваш отзыв добавлен!</h1>
+<a href="{%url 'instructor:instructordetail' slug=instructor.slug%}">Посмотреть</a>
+
+{% endblock %}

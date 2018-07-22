@@ -1,0 +1,27 @@
+{% extends 'profiles/profile_detail.html'%}
+{% load static %}
+{% load easy_maps_tags %}
+{% block content %}
+<form action="" class="address-form form-horizontal" method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   <fieldset>
+       
+       
+    {% for field in form %}
+   <div class="form-group required">
+        {{ field.errors }}
+         <div class="col-sm-4">
+         <label for="id_title">{{ field.label_tag }}</label> 
+        </div>
+        <div class="col-sm-8">
+        {{ field }}
+        </div>
+    </div>
+    {% endfor %}
+
+ 
+   <input type="submit" class="btn btn-primary" value="Добавить">
+   </fieldset>
+</form>
+
+{%endblock%}

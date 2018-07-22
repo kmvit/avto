@@ -1,0 +1,96 @@
+{% extends 'base.html'%}
+{% block content %}
+                <div class="breadcrumb-holder"><ol class="breadcrumb"><li><a href="/">Главная</a></li></ol></div>                                <h1 class="page-title">Регистрация</h1>    
+    <form name="reg" action="" method="post" class="form-horizontal register-form" novalidate="novalidate" _lpchecked="1">
+<div class="col-sm-5">
+    </div>
+    <div class="col-sm-6">
+<div class="tabs">
+    
+   <div class="tab">
+       <input type="radio" id="tab-1" name="tab-group-1" checked>
+       <label for="tab-1">Автошкола</label>
+       
+       <div class="registration-content">
+          Регистрируйся и зарабатывай с гарантией оплаты проектов 
+от более чем 10 000 лучших заказчиков рунета, 
+увеличивай свой рейтинг и доход на постоянном потоке заказов.
+       </div> 
+   </div>
+    
+   <div class="tab">
+       <input type="radio" id="tab-2" name="tab-group-1">
+       <label for="tab-2">Инструктор</label>
+       
+       <div class="registration-content">
+           Зарегистрируйся и размести проект: 
+мы подберем тебе лучших исполнителей с гарантией 
+выполнения работы в срок через безопасную сделку!
+       </div> 
+   </div>
+    
+ </div>  
+</div>
+
+                    <div class="form-group required" aria-required="true">
+                <label for="email" class="col-sm-4 control-label">E-mail</label>
+                <div class="col-sm-7">
+                    <input required="" class="form-control" id="email" name="email" type="email" value="" aria-required="true" style="cursor: auto; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
+                </div>
+            </div>
+        
+                    <div class="form-group required" aria-required="true">
+                <label for="password" class="col-sm-4 control-label">Пароль</label>
+                <div class="col-sm-7">
+                    <input required="" class="form-control" id="password" name="password" type="password" value="" aria-required="true" style="cursor: auto; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
+                </div>
+            </div>
+
+            <div class="form-group required" aria-required="true">
+                <label for="password2" class="col-sm-4 control-label">Повторите пароль</label>
+                <div class="col-sm-7">
+                    <input required="" class="form-control" id="password2" name="password2" type="password" value="" aria-required="true" style="cursor: auto; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACIUlEQVQ4EX2TOYhTURSG87IMihDsjGghBhFBmHFDHLWwSqcikk4RRKJgk0KL7C8bMpWpZtIqNkEUl1ZCgs0wOo0SxiLMDApWlgOPrH7/5b2QkYwX7jvn/uc//zl3edZ4PPbNGvF4fC4ajR5VrNvt/mo0Gr1ZPOtfgWw2e9Lv9+chX7cs64CS4Oxg3o9GI7tUKv0Q5o1dAiTfCgQCLwnOkfQOu+oSLyJ2A783HA7vIPLGxX0TgVwud4HKn0nc7Pf7N6vV6oZHkkX8FPG3uMfgXC0Wi2vCg/poUKGGcagQI3k7k8mcp5slcGswGDwpl8tfwGJg3xB6Dvey8vz6oH4C3iXcFYjbwiDeo1KafafkC3NjK7iL5ESFGQEUF7Sg+ifZdDp9GnMF/KGmfBdT2HCwZ7TwtrBPC7rQaav6Iv48rqZwg+F+p8hOMBj0IbxfMdMBrW5pAVGV/ztINByENkU0t5BIJEKRSOQ3Aj+Z57iFs1R5NK3EQS6HQqF1zmQdzpFWq3W42WwOTAf1er1PF2USFlC+qxMvFAr3HcexWX+QX6lUvsKpkTyPSEXJkw6MQ4S38Ljdbi8rmM/nY+CvgNcQqdH6U/xrYK9t244jZv6ByUOSiDdIfgBZ12U6dHEHu9TpdIr8F0OP692CtzaW/a6y3y0Wx5kbFHvGuXzkgf0xhKnPzA4UTyaTB8Ph8AvcHi3fnsrZ7Wore02YViqVOrRXXPhfqP8j6MYlawoAAAAASUVORK5CYII=&quot;); background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; background-repeat: no-repeat;">
+                </div>
+            </div>
+        
+                    <div class="form-group required" aria-required="true">
+                <label for="surname" class="col-sm-4 control-label">Фамилия</label>
+                <div class="col-sm-7">
+                    <input required="" class="form-control" id="surname" name="surname" type="text" value="" aria-required="true">
+                </div>
+            </div>
+        
+                    <div class="form-group required" aria-required="true">
+                <label for="name" class="col-sm-4 control-label">Имя</label>
+                <div class="col-sm-7">
+                    <input required="" class="form-control" id="name" name="name" type="text" value="" aria-required="true">
+                </div>
+            </div>
+        
+                                <input type="hidden" name="captcha_sid" value="087a5f124a6b21178fa65002beaabb0f">
+            <div class="form-group required" aria-required="true">
+                <label class="col-sm-4 control-label" for="captcha_word">Код с картинки</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <div class="input-group-addon captcha-addon" style="background:url(/bitrix/tools/captcha.php?captcha_sid=087a5f124a6b21178fa65002beaabb0f)"></div>
+                        <input required="" type="text" class="form-control" id="captcha_word" name="captcha_word" aria-required="true">
+                    </div>
+                </div>
+            </div>
+        
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-7 checkbox">
+                <label>
+                    <input name="agree" id="agree" type="checkbox" value="ON" checked="checked">Я
+                    прочитал и согласен с <a href="/rules/" target="_blank">правилами пользования сайтом</a>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-7 text-sm-center">
+                <input class="btn btn-primary" type="submit" value="Зарегистрироваться">
+            </div>
+        </div>
+    </form>
+    {%endblock%}

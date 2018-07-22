@@ -1,0 +1,20 @@
+<rss
+    xmlns:yandex="http://news.yandex.ru"
+    xmlns:media="http://search.yahoo.com/mrss/"
+    xmlns:turbo="http://turbo.yandex.ru"
+    version="2.0"
+>
+    <channel>
+        <item turbo="true">
+           <link>{% url 'school:schooldetail' slug=obj.slug %}</link>
+           <turbo:content>
+               <![CDATA[
+                   <header>
+                       <h1>{{obj.title}}</h1>
+                   </header>
+                   <p>{{obj.body|safe}}</p>
+               ]]>
+           </turbo:content>
+        </item>
+    </channel>
+</rss>

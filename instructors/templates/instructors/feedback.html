@@ -1,0 +1,28 @@
+
+ <form method="post" class="ajax_form af_example" action="feedback">
+       {% csrf_token %}
+      <input type="text" placeholder="Как вас зовут?" name="name" id="id_name" maxlength="300" class="input_text form-control" required/>
+      <span id="err_id_name" class="error_name"></span>
+      <label for="phone">Контактный телефон *
+      <input type="text" placeholder="Например: 79289667788" name="phone" id="id_phone" maxlength="12" class="phone-zv form-control" required/></label>
+      <span id="err_id_phone" class="error_message"></span>
+
+<input type="hidden" name="instructor" id="id_instructor" value="{{instructor.id}}" />
+     
+      
+<input id="agree" required="" type="checkbox">
+Я даю согласие на обработку своих <a href="http://vodibezopasno.com/soglasie/">персональных данных</a>
+<br />
+
+<input class="button" value="Отправить" id="btn" type="submit" disabled="">
+      
+
+
+   </form>
+<script>
+//Jquery
+$('#agree').on('change', function(){
+  if($(this).is(':checked')) $('#btn').attr('disabled', false);
+  else $('#btn').attr('disabled', true);
+});
+</script>

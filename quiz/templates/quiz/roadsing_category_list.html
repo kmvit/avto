@@ -1,0 +1,26 @@
+{% extends 'quiz/quiz_base.html' %}
+{% load i18n %}
+{% block podbor %}
+{% endblock %}
+{% block title %}Дорожные знаки Российской федерации, Водибезопасно{% endblock %}
+{% block bread_name %}Знаки дорожного движения{%endblock%}
+{% block content %}
+<h1 class="news__h1">
+   Знаки дорожного движения
+</h1>
+<div class="line news__line"></div>
+<div class="row">
+    <div class="pdd-index-blocks">
+        <div class="pdd-index-blocks__row">
+            {% for item in roadsing_category_list reversed  %}
+            <div class="col-sm-4 block-item">
+            <a class="pdd-index-block" href="{% url 'quiz:roadsings_detail' slug=item.slug %}">
+                <span class="pdd-index-block__image"> <img src="{{item.img.url}}" alt="{{item.title}}"> </span>
+                <span class="pdd-index-block__content"> <span>{{item.title}}</span> </span>
+            </a>
+            </div>
+            {% endfor %}
+        </div>
+     </div>
+</div>
+{% endblock %}

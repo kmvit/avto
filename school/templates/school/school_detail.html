@@ -1,0 +1,358 @@
+{% extends 'base.html'%}
+{% load profile_tags %}
+{% load account socialaccount %}
+{% load thumbnail %}
+{%load static%}
+{% block title %}{{school.title}} {{school.school_town}}; цена, отзывы, скидки, акции.{% endblock %}
+{% block description %}Описание, отзывы и рейтинг автошколы {{school.title}} в г.{{school.school_town}} {% endblock %}
+{% block bread %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/school/">Автошколы</a></li>
+      <li>{{school.title}}</li>
+   </ol>
+</div>
+{% endblock %}
+{% block content %}
+<div class="school-detail school-pro clearfix">
+   {% block menu %}
+   {% if school.premium %}
+   <div class="ribbon-premium"><span class="edge"><span class="stars stars5"></span></span></div>
+   {% endif %}
+   <h1 class="page-title">{{school.title}}</h1>
+   <div class="mini-menu text-center">
+      <a href="{% url 'school:schooldetail' slug=school.slug %}"><i class="fa fa-fw fa-mortar-board"></i> <em>Описание</em></a>
+      <small>|</small>
+      <a href="{% url 'school:branchlist' slug=school.slug %}"><i class="fa fa-fw fa-map-marker"></i> <em>Адреса</em></a>
+      <small>|</small>
+      <a href="{% url 'school:reviewlist' slug=school.slug %}"><i class="fa fa-fw fa-comments-o"></i> <em>Отзывы</em></a>
+      {% if school.premium %}
+      <small>|</small>
+      <a href="{% url 'school:fotolist' slug=school.slug %}"><i class="fa fa-fw fa-picture-o"></i> <em>Фотографии</em></a>
+      <small>|</small>
+      <a href="{% url 'school:document_list' slug=school.slug %}"><i class="fa fa-fw fa-book"></i> <em>Документы</em></a>
+      {% endif %}
+   </div>
+   {% endblock %}
+   {% block detail %}
+   <div class="school-logo">
+      <img src="{% thumbnail school.logo 200x200 %}" alt="Драйв" class="img-responsive center-block">            
+   </div>
+   <div class="school-data school-data-tip">
+      <div class="address">
+         <address>{{school.adress}}</address>
+         {%if school.metro%}
+         <p class="metro">{{school.metro}}</p>
+         {%endif%}
+         <p class="phone">{{school.phone_number}}</p>
+      </div>
+      <p class="properties">
+         <span class="cat">{%for item in school.category_education.all%}<i>{{item.title}}</i>{%endfor%}</span>
+         <span class="time" title="Обучение занимает {{school.term}} месяца">{{school.term}} месяца</span>            <span class="cost" title="Обучение стоит {{school.cost}}₽ руб.">{{school.cost}}₽ {%if school.gsm%}Включая ГСМ{%endif%}</span>        
+         {% if school.photograph%}<span class="photo" title="В автошколе можно сделать фото на документы">фотограф</span>{% endif %}
+         {% if school.med%}<span class="medicine" title="В автошколе можно можно пройти медкомиссию">медкомиссия</span>{% endif %} 
+         {% if school.online%}<span class="online" title="Автошкола предлагает дистанционное онлайн-обучение">онлайн-обучение</span>{% endif %} 
+      </p>
+      <p class="properties">
+      </p>
+      <p class="school-item-site"><a href="{{school.site}}" target="_blank" rel="nofollow">{{school.site}}</a></p>
+      {% if school.premium %}
+      <ul class="buttons-premium">
+          <li class="online-button">
+             <a class="modal_feddback" href="#">Онлайн заявка</a>
+          </li>
+          <li class="unique-price">
+             Акции автошколы
+             <div class="hidden-unique-price-text">
+                {{school.text_unique_price}}
+            </div>
+          </li>
+      </ul>
+      
+      {% else %}
+      <p class="small text-muted school-phone-tip">∗ — не забудьте сказать, что нашли автошколу на vodibezopasno.com</p>
+      {% endif %}
+   </div>
+   <div class="clearfix"></div>
+   {% if school.premium %}
+   <p>Мы в соц сетях</p>
+   <div class="social-buttons-school">
+      {% if school.vk %}
+      <a href="{{school.vk}}" class="btn btn-social-icon btn-vk" target="_blank">
+      <span class="fa fa-vk"></span>
+      </a>
+      {% endif %}
+      {% if school.fc %}
+      <a href="{{school.fc}}" class="btn btn-social-icon btn-facebook" target="_blank">
+      <span class="fa fa-facebook"></span>
+      </a>
+      {% endif %}
+      {% if school.od %}
+      <a href="{{school.od}}" class="btn btn-social-icon btn-odnoklassniki" target="_blank">
+      <span class="fa fa-odnoklassniki"></span>
+      </a>
+      {% endif %}
+      {% if school.tw%}
+      <a href="{{school.tw}}" class="btn btn-social-icon btn-twitter" target="_blank">
+      <span class="fa fa-twitter"></span>
+      </a>
+      {% endif %}
+   </div>
+   {% endif %}
+   <div class="cropped-text" data-crop="10">{{school.body|safe}}</div>
+   <p class="h3">Рейтинг автошколы</p>
+   <div class="rating-stat container-fluid">
+      <div class="rating-col col-sm-6">
+         <div class="star-ratings" data-max-rating="5" data-avg-rating="3,000">
+            <div class="star-ratings-rating-stars-container">
+               <span class="stars stars{{review_sum}}"></span>
+            </div>
+            {%for item in review_sum%}
+            {% if item.avg_review == None %}
+            <div class="star-ratings-rating-average">Общая оценка: <span class="stars stars">Нет оценок</span></div>
+            {%else%}
+            <div class="star-ratings-rating-average">Общая оценка: <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span></div>
+            {%endif%}
+            <div class="star-ratings-rating-count">Количество оценок: <span class="stars stars">{{review_count}}</span></div>
+            <div class="star-ratings-errors"></div>
+            {%endfor%}
+         </div>
+      </div>
+   </div>
+   {% endblock %}
+</div>
+{% for item in school_list|slice:":1" %}
+{% if school.premium == False %}
+<h2>Рекомендуем автошколы в г.{{school.school_town}}</h2>
+<div class="block-schools">
+   <div class="list-item row">
+      <div class="col-md-5 col-lg-6 col-xl-4">
+         <a href="{% url 'school:schooldetail' slug=item.slug %}">
+         <img src="{% thumbnail item.logo 200x200 %}" alt="{{item.title}}" class="img-responsive center-block">                </a>
+      </div>
+      <div class="col-md-7 col-lg-6 col-xl-8">
+         <h2><a href="{% url 'school:schooldetail' slug=item.slug %}">{{item.title}}</a></h2>
+         <div class="mini-menu">
+            {% if item.premium %}
+            {% if item.avg_review == None %}
+            <span class="stars-pro-wrapper"><span class="stars stars5"></span>
+            {%else%}
+            <span class="stars-pro-wrapper"><span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {%endif%}
+            {% else %}
+            <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {% endif %}
+            </span>
+            <small>|</small>
+            <a href="{% url 'school:reviewlist' slug=item.slug %}"><i class="fa fa-comments-o"></i> <span>Отзывы</span></a>
+            <small>|</small> <a href="{% url 'school:branchlist' slug=item.slug %}"><i class="fa fa-map-marker"></i> <span>Филиалы</span></a>                   
+            {% if item.premium %}  <small>|</small> <a href="{% url 'school:fotolist' slug=item.slug %}"><i class="fa fa-picture-o"></i> <span>Фото</span></a>
+            <small>|</small> <a href="{% url 'school:document_list' slug=item.slug %}"><i class="fa fa-book"></i> <span>Документы</span></a>  
+            {% endif %}             
+         </div>
+         <div class="address">
+            <address>{{item.adress}}</address>
+            <p class="phone">{{item.phone_number}}</p>
+            <ul class="buttons-premium">
+          <li class="online-button">
+             <a class="modal_feddback" href="#">Онлайн заявка</a>
+          </li>
+          <li class="unique-price">
+             Акции автошколы
+             <div class="hidden-unique-price-text">
+                {{item.text_unique_price}}
+            </div>
+          </li>
+      </ul>
+            
+<div id="modal_form_feedback2">
+   <h3>Вы выбрали хорошую автошколу!</h3>
+   <div class="comment">Оставьте заявку и получите скидку на обучение.</div>
+   <a class="exit"></a>
+
+
+ <form method="post" class="ajax_form af_example" action="feedback">
+       {% csrf_token %}
+      <input type="text" placeholder="Как вас зовут?" name="name" id="id_name" maxlength="300" class="input_text form-control" required/>
+      <span id="err_id_name" class="error_name"></span>
+      <label for="phone">Контактный телефон *
+      <input type="text" placeholder="Например: 79289667788" name="phone" id="id_phone" maxlength="12" class="phone-zv form-control" required/></label>
+      <span id="err_id_phone" class="error_message"></span>
+
+<input type="hidden" name="school" id="id_school" value="{{item.id}}" />
+     
+      
+<input id="agree" required="" type="checkbox">
+Я даю согласие на обработку своих <a href="http://vodibezopasno.com/soglasie/">персональных данных</a>
+<br />
+
+<input class="button" value="Отправить" id="btn" type="submit" disabled="">
+      
+
+
+   </form>
+<script>
+//Jquery
+$('#agree').on('change', function(){
+  if($(this).is(':checked')) $('#btn').attr('disabled', false);
+  else $('#btn').attr('disabled', true);
+});
+</script>
+<script>
+   $(function() { // вся мaгия пoсле зaгрузки стрaницы
+   $('.modal_feedback2').click( function(event){ // лoвим клик пo ссылки с class="modal"
+   event.preventDefault(); // выключaем стaндaртную рoль элементa
+   $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
+   function(){ // пoсле выпoлнения предъидущей aнимaции
+   $('#modal_form_feedback2') 
+   .css('display', 'block') // убирaем у мoдaльнoгo oкнa display: none;
+   .animate({opaschool_town: 1, top: '50%'}, 200); // плaвнo прибaвляем прoзрaчнoсть oднoвременнo сo съезжaнием вниз
+   });
+   });
+   /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
+   $('.exit, #overlay').click( function(){ // лoвим клик пo крестику или пoдлoжке
+   $('#modal_form_feedback2')
+   .animate({opaschool_town: 0, top: '45%'}, 200,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+   	function(){ // пoсле aнимaции
+   	$(this).css('display', 'none'); // делaем ему display: none;
+   	$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+   	}
+   );
+   });
+   $(document).on('af_complete', function(event, response) {
+      if (response.success) { //Если форма заполнена и нет ошибок
+     $('#modal_form_feedback2')
+   .animate({opaschool_town: 0, top: '45%'}, 500,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+   	function(){ // пoсле aнимaции
+   	$(this).css('display', 'none'); // делaем ему display: none;
+   	$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+      });
+      }
+      });
+   });
+</script>
+
+<div id="overlay"></div>
+
+
+</div>
+         </div>
+         <p class="properties">
+            <span class="cat">{% for i in item.category_education.all %}<abbr title="Обучение на категорию {{i}}">{{i}}</abbr>{% endfor %}</span>
+            <span class="time" title="Обучение занимает {{item.term}} месяца">{{item.term}} месяца</span>                    <span class="cost" title="Обучение стоит {{item.cost}}₽ руб.">{{item.cost}}₽ {%if item.gsm%}Включая ГСМ{%endif%}<span class="param-no-fuel"></span></span>                
+            {% if item.photograph%}<span class="photo" title="В автошколе можно сделать фото на документы">фотограф</span>{% endif %}
+            {% if item.med%}<span class="medicine" title="В автошколе можно можно пройти медкомиссию">медкомиссия</span>{% endif %}
+            {% if item.online%}<span class="online" title="Автошкола предлагает дистанционное онлайн-обучение">онлайн-обучение</span>{% endif %} 
+         </p>
+      </div>
+   </div>
+</div>
+{% endif %}
+{% endfor %}
+{% block reviews %}
+<h2>Отзывы об автошколе</h2>
+<div class="reviews-list">
+   <div id="insert-review-here"></div>
+   {% for item in review_list|slice:":10" %}
+   <div class="panel review-item">
+      <div class="review-heading row">
+         <div class="col-sm-6 meta text-sm-center">
+            <div class="img-circle avatar sprite avatar48"></div>
+            <p class="title h5"><b>{{item.name}}</b></p>
+            <p class="h6 text-muted time">{{item.born}}</p>
+         </div>
+         <div class="col-sm-6 rating text-sm-center text-right">
+            <span class="stars stars{{item.rating}}"></span>
+         </div>
+      </div>
+      <div class="review-description">
+         <p>{{item.body}}</p>
+         <!--<div class="stats">
+            <a href="#" class="btn btn-default stat-item stat-item-up"><i class="fa fa-thumbs-up icon"></i>2</a>
+            <a href="#" class="btn btn-default stat-item stat-item-down"><i class="fa fa-thumbs-down icon"></i>12</a>
+            </div>-->
+      </div>
+      {% for i in item.reviewresponce_set.all %}
+      <div class="reviewresponse">
+         <p>Ответ школы:  {{i.body}}</p>
+      </div>
+      {% endfor %}
+      {% if school.premium and school.user == user%}
+      <div id="reviewresponce">
+         <form action="{% url 'school:reviewresponce' id=item.id%}" method="post" onsubmit="return checkForm(this.elements)">
+            {% csrf_token %}
+            <p><b>Ответить на комментарий:</b></p>
+            <p><textarea rows="2" cols="55" name="text"></textarea></p>
+            <input type="hidden" name="review_id" value="{{item.id}}"/>
+            <p><input type="submit" class="btn btn-primary" value="Отправить"></p>
+         </form>
+      </div>
+      {% endif %}
+   </div>
+   {%endfor%}
+</div>
+<p class="text-center"><a href="{% url 'school:reviewlist' slug=school.slug %}">Читать все отзывы</a></p>
+<p class="h2 bordered">Оцените автошколу</p>
+<div id="modal_form_feedback">
+   <h3>Вы выбрали хорошую автошколу!</h3>
+   <div class="comment">Оставьте заявку и получите скидку на обучение.</div>
+   <a class="exit"></a>
+  {% include "school/feedback.html" %}
+</div>
+<div id="overlay"></div>
+<script>
+   $(function() { // вся мaгия пoсле зaгрузки стрaницы
+   $('.modal_feddback').click( function(event){ // лoвим клик пo ссылки с class="modal"
+   event.preventDefault(); // выключaем стaндaртную рoль элементa
+   $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
+   function(){ // пoсле выпoлнения предъидущей aнимaции
+   $('#modal_form_feedback') 
+   .css('display', 'block') // убирaем у мoдaльнoгo oкнa display: none;
+   .animate({opaschool_town: 1, top: '50%'}, 200); // плaвнo прибaвляем прoзрaчнoсть oднoвременнo сo съезжaнием вниз
+   });
+   });
+   /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
+   $('.exit, #overlay').click( function(){ // лoвим клик пo крестику или пoдлoжке
+   $('#modal_form_feedback')
+   .animate({opaschool_town: 0, top: '45%'}, 200,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+   	function(){ // пoсле aнимaции
+   	$(this).css('display', 'none'); // делaем ему display: none;
+   	$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+   	}
+   );
+   });
+   $(document).on('af_complete', function(event, response) {
+      if (response.success) { //Если форма заполнена и нет ошибок
+     $('#modal_form_feedback')
+   .animate({opaschool_town: 0, top: '45%'}, 500,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+   	function(){ // пoсле aнимaции
+   	$(this).css('display', 'none'); // делaем ему display: none;
+   	$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+      });
+      }
+      });
+   });
+</script>
+<script>
+   function checkForm(form) {
+       var e = 0;
+       for (var i = 0; i < form.length-1; i++) {
+           if (!form[i].value.replace(/^\s+|\s+$/g, '')){
+               form[i].style.border='1px solid red';
+               e = 1;
+           }
+       }
+       if(e) {
+           alert ('Заполните все поля');
+           return false;
+       }
+   }
+</script>
+<p class="text-center"><a href="{%url 'school:reviewadd' slug=school.slug%}">Напишите отзыв об автошколе с подтверждением по email</a></p>
+{% endblock %}
+{% endblock %}
+{% block sidebar %}
+{% load school_tags %}
+{% best %}
+{% endblock %}

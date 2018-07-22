@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+{% load article_tags %}
+{% load thumbnail %}
+{% block title %}Статьи категории {{category}}, автомобильные статьи{% endblock %}
+{% block description %}На странице представлены автомобильные статьи категории {{category}} со всего мира{% endblock %}
+{% block bread %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+   </ol>
+</div>
+{% endblock %}
+{% block content %}
+<div class="list">
+    {% for item in article_list %}
+    <div class="list-item row">
+        <div class="col-md-5 col-lg-6 col-xl-4">
+            <a href="{% url 'articles:article_detail' slug=item.slug category_slug=item.category.slug %}">
+                <img src="{% thumbnail item.pict 255x155 crop %}" alt="{{item.title}}" class="img-responsive center-block">
+            </a>
+        </div>
+        <div class="col-md-7 col-lg-6 col-xl-8">
+            <h2><a href="{% url 'articles:article_detail' slug=item.slug category_slug=item.category.slug %}">{{item.title}}</a></h2>
+            <p>{{item.body|safe|linebreaks|slice:":200"}}</p>                
+            <p class="date">{{item.born}}</p>
+        </div>
+        </div>
+    <hr>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block sidebar %}
+<div class="sidebar-articles">
+<p class="h4">Категории статей</p>
+<hr class="border">
+<ul class="category_list">
+    {% for item in category_list %}
+    <li><a href="{% url 'articles:category_detail' slug=item.slug%}">{{item.title}}</a></li>
+    {% endfor %}
+    <li><a href="/article/faq/">Вопрос? Ответ!</a></li>
+</ul>
+</div>
+<div class="sidebar-articles">
+    <p class="h4">Интересные статьи</p>
+    <hr class="border">
+    {% load article_tags %}
+    {% article_sidebar %}
+</div>
+<div class="sidebar-articles">
+    <p class="h4">Интересные новости</p>
+    <hr class="border">
+    {% load news_tags %}
+    {% news_sidebar %}
+    </div>    
+{% endblock %}

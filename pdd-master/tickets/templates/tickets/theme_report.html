@@ -1,0 +1,21 @@
+{% extends "base/__base.html" %}
+
+
+{% block content %}
+
+
+<h2 class="text-primary text-center">Ваш результат:</h2>
+<h4 class="text-primary text-center">Вы прошли тему: {{ theme_name }}</h4>
+
+<p class="text-center" style='bac'>Правильных ответов: <span class="badge" style='background-color:green;'>{{ right_ans }}</span></p>
+<p class="text-center">Сделали ошибок: <span class="badge" style='background-color:red;'>{{ wrong_ans }}</span></p>
+
+<p class="text-center"><a class="btn btn-primary" href="{% url 'tickets:theme_list' %}" role="button">Выбрать другую тему</a></p>
+
+{% for item in data %}
+
+	{% include 'tickets/includes/_report_item.html' %}
+
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% load profile_tags %}
+{% load account socialaccount %}
+{% load thumbnail %}
+{%load static%}
+{% block title %}{{school.title}}{% endblock %}
+{% block bread %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li><a href="/school/">Автошколы</a></li>
+      <li>Ответ на комментарий</li>
+   </ol>
+</div>
+{% endblock %}
+{% block content %}
+<p>Спасибо за ваш ответ. Он уже опубликован. <a href="{% url 'instructor:instructordetail' slug=instructor.slug %}">Посмотреть</p>
+{% endblock %}

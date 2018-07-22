@@ -1,0 +1,94 @@
+{%load static%}
+{% load thumbnail %}
+<div class="sidebar-articles">
+    <p class="h4">Лучшие автошколы</p>
+    <hr class="border">
+    {% for item in school_list_side|slice:":10" %}
+    {% if item.avg_review != None or item.premium %}
+    <div class="media">
+        <div class="media-left">
+            <a href="{% url 'school:schooldetail' slug=item.slug %}">
+                <img src="{% thumbnail item.logo 100x100 %}" alt="{{item.title}}" class="media-object">
+            </a>
+        </div>
+        <div class="media-body">
+            <p class="title"><a href="{% url 'school:schooldetail' slug=item.slug %}">{{item.title}}</a></p>
+        </div>
+         <div class="mini-menu">
+            {% if item.premium %}
+            {% if item.avg_review == None %}
+            <span class="stars-pro-wrapper"><span class="stars stars5"></span>
+            {%else%}
+            <span class="stars-pro-wrapper"><span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {%endif%}
+            {% else %}
+            <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {% endif %}
+            </span>
+         </div>
+    </div>
+    {% endif %}
+{% endfor %}
+{% for item in school_list_side|slice:":10" %}
+    {% if item.avg_review == None and item.premium == False %}
+    <div class="media">
+        <div class="media-left">
+            <a href="{% url 'school:schooldetail' slug=item.slug %}">
+                <img src="{% thumbnail item.logo 100x100 %}" alt="{{item.title}}" class="media-object">
+            </a>
+        </div>
+        <div class="media-body">
+            <p class="title"><a href="{% url 'school:schooldetail' slug=item.slug %}">{{item.title}}</a></p>
+        </div>
+        <div class="mini-menu">
+            {% if item.premium %}
+            {% if item.avg_review == None %}
+            <span class="stars-pro-wrapper"><span class="stars stars5"></span>
+            {%else%}
+            <span class="stars-pro-wrapper"><span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {%endif%}
+            {% else %}
+            <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {% endif %}
+            </span>
+         </div>
+    </div>
+    {% endif %}
+{% endfor %}
+
+</div>
+<div class="sidebar-articles">
+    <p class="h4">Лучшие инструкторы</p>
+    <hr class="border">
+    {% for item in instructor_list|slice:":10" %}
+
+    <div class="media">
+        <div class="media-left">
+            
+            <a href="{% url 'instructor:instructordetail' slug=item.slug %}">
+            {%if item.premium%}
+            <div class="stamp-list-thumb">
+                <img src="{% static 'images/provereno.png'%}" alt="{{item.fio}}" class="img-responsive center-block"> 
+            </div>
+            {%endif%}
+                <img src="{% thumbnail item.logo 100x100 %}" alt="{{item.title}}" class="media-object">
+            </a>
+             <div class="block-rating-recommended">
+                 {% if item.premium %}
+                    <span class="stars-pro-wrapper">
+                        <span class="stars stars5"></span>
+                    </span> 
+
+                    {%else%}
+                    <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+                    {%endif%}
+                  </div>
+        </div>
+        <div class="media-body">
+            <p class="title"><a href="{% url 'instructor:instructordetail' slug=item.slug %}">{{item.fio}}</a></p>
+        </div>
+        
+    </div>
+
+{% endfor %}
+</div>

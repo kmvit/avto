@@ -1,0 +1,14 @@
+{% load thumbnail %}
+{% for item in news|slice:"7" %}
+<div class="media">
+   <div class="media-left">
+      <a href="{% url 'news:newsdetail' slug=item.slug %}">
+      <img src="{% thumbnail item.pict 80x60 crop%}" alt="{{item.title}}" class="media-object">
+      </a>
+   </div>
+   <div class="media-body">
+      <p class="title"><a href="{% url 'news:newsdetail' slug=item.slug %}">{{item.title}}</a></p>
+      <p class="date">{{item.born}}</p>
+   </div>
+</div>
+{% endfor %}

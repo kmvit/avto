@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% block title %} {{page.title}} - Водибезопасно {% endblock %}
+{% block description %} Будьте в курсе авто новостей - {{page.title}} {% endblock %}
+{% load thumbnail %}
+{% block hovercontainer%}
+<div class="covercontainer" style="background-image:url({% thumbnail article.pict 1600x1600 crop%});">
+   <div class="container sitecontainer">
+      <div class="row">
+         <div class="col-md-8 col-lg-8 col-xl-9">
+            <div class="cover-meta">
+               <div class="breadcrumb-holder">
+                  <ol class="breadcrumb">
+                     <li><a href="/">Главная</a></li>
+                     <li><a href="{% url 'footerpage' slug=page.slug%}">{{page.title}}</a></li>
+                  </ol>
+               </div>
+               <h1 class="page-title">{{page.title}}</h1>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+{% block content %}
+<article class="article">
+   {{page.body|safe}}
+</article>
+{% endblock %}

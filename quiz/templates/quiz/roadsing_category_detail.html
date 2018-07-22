@@ -1,0 +1,94 @@
+{% extends 'quiz/quiz_base.html' %}
+{% block title %}{{roadsing_category}}{% endblock %}
+{% block content %}
+<h1 class="news__h1">{{roadsing_category}}</h1>
+<div class="line news__line"></div>
+<div class="row">
+
+   <div class="row">
+      <div class="col-md-3">
+         <span>Номер</span>
+      </div>
+      <div class="col-md-9">
+         <span>Название</span>
+      </div>
+   </div>
+   <hr>
+   {% for item in road_list %}
+   <div class="row">
+      <a href="#hide{{item.id}}" class="hiden" id="hide{{item.id}}">+</a>
+      <a href="#show{{item.id}}" class="showen" id="show{{item.id}}">-</a>
+      <div class="question">
+         <div class="col-md-3">
+            <span>{{item.number}}</span>
+         </div>
+         <div class="col-md-6">
+            {{item.title}}<br/>
+            <img src="{{item.img.url}}">{% if item.img2 %}<img src="{{item.img2.url}}">{% endif %}{% if item.img3 %}<img src="{{item.img3.url}}">{% endif %}{% if item.img4 %}<img src="{{item.img4.url}}">{% endif %}{% if item.img5 %}<img src="{{item.img5.url}}">{% endif %}{% if item.img6 %}<img src="{{item.img6.url}}">{% endif %}
+         </div>
+      </div>
+      <div class="listen">
+         <div class="col-md-3">
+         </div>
+         <p> 
+         <div class="col-md-9">
+            {{item.body|safe}}
+         </div>
+         </p>
+      </div>
+   </div>
+   <hr>
+   {% endfor %}
+</div>
+{% endblock %}
+{% block sidebar%}
+<div id="aside" class="au-grid au-grid-right">
+   <div class="au-affix affix-top" style="width: 314px;">
+      <h2 class="au-affix__header">Разделы</h2>
+      <div class="au-affix__content">
+         <ul class="nav au-affix__list">
+             {% for item in category_list %}
+             {% if item == roadsing_category %}
+            <li class="active">
+               <a href="{% url 'quiz:roadsings_detail' slug=item.slug %}">{{item.title}}</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'quiz:roadsings_detail' slug=item.slug %}">{{item.title}}</a>
+            </li>
+         {% endif %}
+         {% endfor %}
+         </ul>
+      </div>
+   </div>
+</div>
+<script>
+var elementPosition = $('.au-affix').offset();
+$( document ).ready( function () {
+$(window).scroll(function(){
+        if($(window).scrollTop() > elementPosition.top){
+              $('.au-affix').css('position','fixed').css('top','0');
+        } else {
+            $('.au-affix').css('position','static');
+        }    
+});
+ } );
+</script>
+<script>
+   var menu = document.querySelector('.au-affix');
+   
+   menu.onclick = function(e) {
+   	if (e.target.tagName.toLowerCase() != 'a') return;
+   
+   	[].forEach.call(menu.querySelectorAll('a'), function(item) {
+   		item.classList.remove('active');
+   	});
+   
+   	e.target.classList.add('active');
+   };
+</script>
+<style>
+   .active {
+   background: #aaa;
+   }
+{% endblock%}

@@ -1,0 +1,14 @@
+{% load thumbnail %}
+{% for item in article_list|slice:":7" %}
+<div class="media">
+   <div class="media-left">
+      <a href="{% url 'articles:article_detail' category_slug=item.category.slug slug=item.slug %}">
+      <img src="{% thumbnail item.pict 80x60 crop%}" alt="{{item.title}}" class="media-object">
+      </a>
+   </div>
+   <div class="media-body">
+      <p class="title"><a href="{% url 'articles:article_detail' category_slug=item.category.slug slug=item.slug %}">{{item.title}}</a></p>
+      <p><span class="category category-ssdriving-school">{{item.category}}</span></p>
+   </div>
+</div>
+{% endfor %}

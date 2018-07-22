@@ -1,0 +1,72 @@
+{% extends 'quiz/quiz_base.html' %}
+{% load i18n %}
+{% block title %}Правила дорожного движения России, Водибезопасно{% endblock %}
+{% block bread_name %}Правила дорожного движения 2017{% endblock %}
+{% block content %}
+<h1 class="news__h1">
+Правила дорожного движения Российской Федерации 2017
+</h1>
+<div class="line news__line"></div>
+<div class="row">
+   {% for item in rules_category_list %}
+   <h2 id="common{{forloop.counter}}">{{forloop.counter}}.{{item.title}}</h2>
+   <hr>
+   {% for i in item.rule_set.all %}
+   <div class="row">
+      <div class="col-md-12">
+          {{i.body|safe}}
+      </div>
+   </div>
+   <hr>
+   {% endfor %}
+   {% endfor %}
+</div>
+{% endblock %}
+{% block sidebar%}
+<div id="aside" class="au-grid au-grid-right">
+   <div class="au-affix affix-top" style="width: 314px;">
+      <h2 class="au-affix__header">Разделы</h2>
+      <div class="au-affix__content">
+         <ul class="nav au-affix__list">
+             {% for item in rules_category_list %}
+            <li>
+                <a href="#common{{forloop.counter}}">{{item.title}}</a>
+            </li>
+         {% endfor %}
+         </ul>
+      </div>
+   </div>
+</div>
+<script>
+var elementPosition = $('.au-affix').offset();
+$( document ).ready( function () {
+$(window).scroll(function(){
+        if($(window).scrollTop() > elementPosition.top){
+              $('.au-affix').css('position','fixed').css('top','0');
+        } else {
+            $('.au-affix').css('position','static');
+        }    
+});
+ } );
+</script>
+<script>
+   var menu = document.querySelector('.au-affix');
+   
+   menu.onclick = function(e) {
+   	if (e.target.tagName.toLowerCase() != 'a') return;
+   
+   	[].forEach.call(menu.querySelectorAll('a'), function(item) {
+   		item.classList.remove('active');
+   	});
+   
+   	e.target.classList.add('active');
+   };
+</script>
+<style>
+   .active {
+   background: #aaa;
+   }
+ </style>
+{% endblock%}
+
+

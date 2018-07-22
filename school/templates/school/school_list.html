@@ -1,0 +1,203 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+{% block title %}Автошкола, отзывы, официальный сайт автошколы, Водибезопасно{% endblock %}
+{% block description %} Автошкола {% if city %}г.{{city}}{% else %}{% endif %}, сайт автошколы, официальные автошколы {% if city %}г.{{city}}{% else %}{% endif %} {% endblock %}
+{% block content %}
+<div class="breadcrumb-holder">
+   <ol class="breadcrumb">
+      <li><a href="/">Главная</a></li>
+      <li>Автошколы</li>
+   </ol>
+</div>
+<h1 class="page-title">Рейтинг и отзывы об автошколах {% if city %}г.{{city}}{% else %}{% endif %}</h1>
+<p class="page-desc">Плохая автошкола дает не качественное обучение вождению, от которого потом остаются привычки на всю жизнь. Избавиться от них бывает очень сложно. Для того,чтобы не оказаться в похожей ситуации, подходите очень серьезно к выбору автошколы. Здесь, вы можете просмотреть рейтинг автошкол, отзывы об автошколах, официальный сайт и многое другое.</p>
+<div class="list school-list container-fluid">
+    {%  for item in school_list %}
+    {% if item.avg_review != None or item.premium %}
+   <div class="list-item row">
+      <div class="col-md-5 col-lg-6 col-xl-4">
+         <a href="{% url 'school:schooldetail' slug=item.slug %}">
+         <img src="{% thumbnail item.logo 200x200 %}" alt="{{item.title}}" class="img-responsive center-block">                </a>
+      </div>
+      <div class="col-md-7 col-lg-6 col-xl-8">
+         <h2><a href="{% url 'school:schooldetail' slug=item.slug %}">{{item.title}}</a></h2>
+         <div class="mini-menu">
+            {% if item.premium %}
+            {% if item.avg_review == None %}
+            <span class="stars-pro-wrapper"><span class="stars stars5"></span>
+            {%else%}
+            <span class="stars-pro-wrapper"><span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {%endif%}
+            {% else %}
+            <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {% endif %}
+            </span>
+            
+            <small>|</small>
+            <a href="{% url 'school:reviewlist' slug=item.slug %}"><i class="fa fa-comments-o"></i> <span>Отзывы</span></a>
+            <small>|</small> <a href="{% url 'school:branchlist' slug=item.slug %}"><i class="fa fa-map-marker"></i> <span>Филиалы</span></a>                      
+            {% if item.premium %}  <small>|</small> <a href="{% url 'school:fotolist' slug=item.slug %}"><i class="fa fa-picture-o"></i> <span>Фото</span></a>
+            <small>|</small> <a href="{% url 'school:document_list' slug=item.slug %}"><i class="fa fa-book"></i> <span>Документы</span></a>  
+            {% endif %}
+            </div>
+         <div class="address">
+            <address>{{item.adress}}</address>
+            <p class="phone">{{item.phone_number}}</p>
+         </div>
+         <p class="properties">
+            <span class="cat">{% for i in item.category_education.all|dictsort:"title" %}<abbr title="Обучение на категорию {{i}}">{{i}}</abbr>{% endfor %}</span>
+            <span class="time" title="Обучение занимает {{item.term}} месяца">{{item.term}} месяца</span>                    <span class="cost" title="Обучение стоит {{item.cost}}₽ руб.">{{item.cost}}₽ {%if item.gsm%}Включая ГСМ{%endif%}<span class="param-no-fuel"></span></span>                
+            {% if item.photograph%}<span class="photo" title="В автошколе можно сделать фото на документы">фотограф</span>{% endif %}
+            {% if item.med%}<span class="medicine" title="В автошколе можно можно пройти медкомиссию">медкомиссия</span>{% endif %}
+            {% if item.online%}<span class="online" title="Автошкола предлагает дистанционное онлайн-обучение">онлайн-обучение</span>{% endif %} 
+            {% if item.premium %}
+            <ul class="buttons-premium">
+                <li class="online-button">
+                    <a class="modal_feedback{{ forloop.counter }}" href="#">Онлайн заявка</a>
+                </li>
+                <li class="unique-price">
+                        Акция Автошколы
+                     <div class="hidden-unique-price-text">
+                        {{item.text_unique_price}}
+                    </div>
+                </li>
+            </ul>
+            {% endif %}
+         </p>
+      </div>
+   </div>
+   {% endif%}
+   {% endfor %}
+    {%  for item in school_list %}
+    {% if item.avg_review == None and item.premium == False %}
+   <div class="list-item row">
+      <div class="col-md-5 col-lg-6 col-xl-4">
+         <a href="{% url 'school:schooldetail' slug=item.slug %}">
+         <img src="{% thumbnail item.logo 200x200 %}" alt="{{item.title}}" class="img-responsive center-block">                </a>
+      </div>
+      <div class="col-md-7 col-lg-6 col-xl-8">
+         <h2><a href="{% url 'school:schooldetail' slug=item.slug %}">{{item.title}}</a></h2>
+         <div class="mini-menu">
+            {% if item.premium %}
+            {% if item.avg_review == None %}
+            <span class="stars-pro-wrapper"><span class="stars stars5"></span>
+            {%else%}
+            <span class="stars-pro-wrapper"><span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {%endif%}
+            {% else %}
+            <span class="stars stars{{item.avg_review|floatformat:"0"}}"></span>
+            {% endif %}
+            </span>
+            
+            <small>|</small>
+            <a href="{% url 'school:reviewlist' slug=item.slug %}"><i class="fa fa-comments-o"></i> <span>Отзывы</span></a>
+            <small>|</small> <a href="{% url 'school:branchlist' slug=item.slug %}"><i class="fa fa-map-marker"></i> <span>Филиалы</span></a>                   {% if item.premium %}  <small>|</small> <a href="{% url 'school:fotolist' slug=item.slug %}"><i class="fa fa-picture-o"></i> <span>Фото</span></a>   {% endif %}             
+         </div>
+         <div class="address">
+            <address>{{item.adress}}</address>
+            <p class="phone">{{item.phone_number}}</p>
+         </div>
+         <p class="properties">
+            <span class="cat">{% for i in item.category_education.all %}<abbr title="Обучение на категорию {{i}}">{{i}}</abbr>{% endfor %}</span>
+            <span class="time" title="Обучение занимает {{item.term}} месяца">{{item.term}} месяца</span>                    <span class="cost" title="Обучение стоит {{item.cost}}₽ руб.">{{item.cost}}₽ {%if item.gsm%}Включая ГСМ{%endif%}<span class="param-no-fuel"></span></span>                
+            {% if item.photograph%}<span class="photo" title="В автошколе можно сделать фото на документы">фотограф</span>{% endif %}
+            {% if item.med%}<span class="medicine" title="В автошколе можно можно пройти медкомиссию">медкомиссия</span>{% endif %}
+            {% if item.online%}<span class="online" title="Автошкола предлагает дистанционное онлайн-обучение">онлайн-обучение</span>{% endif %} 
+         </p>
+      </div>
+   </div>
+   {% endif%}
+  {% endfor %}
+  {%  for item in school_list %}
+   {% if item.premium %}
+  <div id="modal_form_feedback{{ forloop.counter }}">
+   <h3>Вы выбрали хорошую автошколу!</h3>
+   <div class="comment">Оставьте заявку и получите скидку на обучение.</div>
+   <a class="exit"></a>
+
+
+ <form method="post" class="ajax_form af_example" action="{% url 'school:feedbackschool' slug=item.slug%}">
+       {% csrf_token %}
+      <input type="text" placeholder="Как вас зовут?" name="name" id="id_name" maxlength="300" class="input_text form-control" required/>
+      <span id="err_id_name" class="error_name"></span>
+      <label for="phone">Контактный телефон *
+      <input type="text" placeholder="Например: 79289667788" name="phone" id="id_phone" maxlength="12" class="phone-zv form-control" required/></label>
+      <span id="err_id_phone" class="error_message"></span>
+
+<input type="hidden" name="school" id="id_school" value="{{item.id}}" />
+     
+      
+<input id="agree{{forloop.counter}}" required="" type="checkbox">
+Я даю согласие на обработку своих <a href="http://vodibezopasno.com/soglasie/">персональных данных</a>
+<br />
+
+<input class="button" value="Отправить" id="btn{{forloop.counter}}" type="submit" disabled="">
+      
+
+
+   </form>
+<script>
+//Jquery
+$('#agree{{forloop.counter}}').on('change', function(){
+  if($(this).is(':checked')) $('#btn{{forloop.counter}}').attr('disabled', false);
+  else $('#btn{{forloop.counter}}').attr('disabled', true);
+});
+</script>
+<script>
+   $(function() { // вся мaгия пoсле зaгрузки стрaницы
+   $('.modal_feedback{{ forloop.counter }}').click( function(event){ // лoвим клик пo ссылки с class="modal"
+   event.preventDefault(); // выключaем стaндaртную рoль элементa
+   $('#overlay').fadeIn(400, // снaчaлa плaвнo пoкaзывaем темную пoдлoжку
+   function(){ // пoсле выпoлнения предъидущей aнимaции
+   $('#modal_form_feedback{{ forloop.counter }}') 
+   .css('display', 'block') // убирaем у мoдaльнoгo oкнa display: none;
+   .animate({opacity: 1, top: '50%'}, 200); // плaвнo прибaвляем прoзрaчнoсть oднoвременнo сo съезжaнием вниз
+   });
+   });
+   /* Зaкрытие мoдaльнoгo oкнa, тут делaем тo же сaмoе нo в oбрaтнoм пoрядке */
+   $('.exit, #overlay').click( function(){ // лoвим клик пo крестику или пoдлoжке
+   $('#modal_form_feedback{{ forloop.counter }}')
+   .animate({opacity: 0, top: '45%'}, 200,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+   	function(){ // пoсле aнимaции
+   	$(this).css('display', 'none'); // делaем ему display: none;
+   	$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+   	}
+   );
+   });
+   $(document).on('af_complete', function(event, response) {
+      if (response.success) { //Если форма заполнена и нет ошибок
+     $('#modal_form_feedback{{ forloop.counter }}')
+   .animate({opacity: 0, top: '45%'}, 500,  // плaвнo меняем прoзрaчнoсть нa 0 и oднoвременнo двигaем oкнo вверх
+   	function(){ // пoсле aнимaции
+   	$(this).css('display', 'none'); // делaем ему display: none;
+   	$('#overlay').fadeOut(400); // скрывaем пoдлoжку
+      });
+      }
+      });
+   });
+</script>
+
+
+</div> 
+
+<div id="overlay"></div>
+{% endif %}
+   {% endfor %}
+   <div class="pagination">
+    <span class="step-links">
+        {% if school_list.has_previous %}
+            <a href="?page={{ school_list.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ school_list.number }} из {{ school_list.paginator.num_pages }}
+        </span>
+
+        {% if school_list.has_next %}
+            <a href="?page={{ school_list.next_page_number }}">следующая</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+{% endblock %}

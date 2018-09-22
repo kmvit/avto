@@ -11,7 +11,7 @@ django-easy-maps==0.9.3
 django-generic-positions==0.2.2
 django-geoip==0.5.2.1
 django-hvad==1.7.0
-django-ipgeobase==1.0.2b0
+django-ipgeobase
 django-libs==1.67.12
 django-location-field==2.0.3
 django-model-utils==3.0.0

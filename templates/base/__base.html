@@ -6,8 +6,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta description content="Решать Билеты ПДД онлайн, экзаменационные билеты ПДД, билеты ПДД по темам, марафон 800, разбор ошибок в билетах по ПДД. Актуальные изменения в билетах по ПДД с подсказками и описанием. Билеты ПДД (категория А и В). Вы можете пройти тренировку по любому из билетов, или по любой теме ПДД. Решайте билеты по ПДД, готовьтесь к экзамену в ГИБДД на право управления транспортным средством. ">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Решение билетов</title>
+    <title>Билеты ПДД онлайн, билеты ПДД онлайн, решать билеты ПДД, экзаменационные билеты ПДД</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -31,8 +32,9 @@
   <body>
     <div class="container-fluid">
       <div class='col-sm-6 col-sm-offset-3'>  
-        <h1 class='text-center lead'>Решение билетов (сайт на питоне фреймворк Django)</h1>
+        <h1 class='text-center lead'>Решение билетов ППД</h1>
         <br>
+        <a href="{% url 'quiz:quiz_index' %}" class='text-center lead'>Назад</a>
         <div class="block-pdd-nav">
           {% block pdd_nav %}
           {% include 'base/includes/_pdd_nav.html' %}

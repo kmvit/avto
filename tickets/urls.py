@@ -24,6 +24,7 @@ from .views import (
     pdddataClear,
     )
 
+app_name= 'tickets'
 
 urlpatterns = [
     url(r'^$', TicketListView.as_view(), name='ticket_list'),

@@ -3,12 +3,12 @@
 
 	<div class="star-line {% if nav_tab == 'theme' or nav_tab == 'marathon'%} star-line-marathon-theme-error{% endif %}" >
 	{% for star in stars %}		
-		<span class="glyphicon glyphicon-star" aria-hidden="true" style="color:{{ star }}"></span>
+		<span class="" aria-hidden="true" style="color:{{ star }}; line-height:1em">*</span>
 	{% endfor %}
 
 	{% for star in grey_stars %}
 	<span class="grey-star-{{ forloop.counter }}">
-		<span class="glyphicon glyphicon-star" aria-hidden="true" ></span>
+		<span  class="" aria-hidden="true" style="line-height:1em">*</span>
 	</span>
 		
 	{% endfor %}

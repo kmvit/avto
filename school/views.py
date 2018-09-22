@@ -200,22 +200,17 @@ class ReviewAdd(CreateView):
 
 def ReviewVerificathion(request, pk, slug):
     school = School.objects.get(slug=slug)
-    review_list = Review.objects.filter(school=school).exclude(id=pk)
+    review_list = Review.objects.filter(school=school)
     review = Review.objects.get(id=pk)
-    email_count=0
     for item in review_list:
-        if item.email==review.email:
-            email_count+=1
-        else:
-            email_count=0
-    if email_count > 0:
-        context = {'review':review, 'school':school}
-        return render(request, 'school/not_success_review_add.html', context)
-    else:
-        review.verificated = True
-        review.save()
-        context = {'review':review, 'school':school }
-        return render(request, 'school/success_review_add.html', context)
+        if item.email == review.email and item.verificated:
+            context = {'review':review, 'school':school}
+            return render(request, 'school/not_success_review_add.html', context)
+    
+    review.verificated = True
+    review.save()
+    context = {'review':review, 'school':school }
+    return render(request, 'school/success_review_add.html', context)
         
 def ReviewSend(request,slug):
     return render(request, 'school/review_send.html')

@@ -20,9 +20,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 
+app_name= 'pdd'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^tickets/', include("tickets.urls", namespace='tickets')),
+    url(r'^tickets/', include("tickets.urls", namespace='tickets', app_name='tickets')),
     # url(r'^tinymce/', include('tinymce.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 

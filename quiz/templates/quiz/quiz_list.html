@@ -5,22 +5,14 @@
 {% block title %}Экзамен- Билеты ПДД онлайн, Водибезопасно{% endblock %}
 {% block bread_name %}Экзамены{%endblock%}
 {% block content %}
-			<h1 class="news__h1">Билеты</h1>
+			<h1 class="news__h1">Решение билетов ПДД</h1>
 			<div class="line news__line"></div>
 			<div class="row">
-			    {% if quiz_list %}
-			    <div class="test-block">
-			        <ul>
-			    {% for quiz in quiz_list %}
-					<li>
-						<a href="{% url 'quiz:quiz_question' quiz_name=quiz.url %}">{{ quiz.title }}</a>
-					</li>
-				{% endfor %}
-				    </ul>
-				</div>
-				{% else %}
-                    <p>{% trans "There are no available quizzes" %}.</p>
-                {% endif %}
+			  
+			   
+			       <a href="{% url 'tickets:ticket_list'  %}" style="margin-left:15px">Перейти к билетам</a>
+			
+			
 			</div>
 			
 

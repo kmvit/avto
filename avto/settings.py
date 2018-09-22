@@ -58,6 +58,12 @@ INSTALLED_APPS = [
     'articles',
     'profiles',
     'city',
+    'pdd',
+    'tickets',
+    'quiz',
+    'multichoice',
+    'true_false',
+    'essay',
     
     'easy_maps',
     'easy_thumbnails',
@@ -67,16 +73,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'quiz',
-    'essay',
-    'multichoice',
-    'true_false',
-    'filebrowser',
+    'ckeditor',
+    'ckeditor_uploader',
     'captcha',
     'footerpage',
     'watermarker',
     'widget_tweaks',
     'django_crontab',
+    
 ]
 # AllAuth
 AUTHENTICATION_BACKENDS = (
@@ -194,6 +198,39 @@ CRONJOBS = [
     ('*/720 * * * *', 'school.cron.my_scheduled_job'),
     ('*/720 * * * *', 'instructors.cron.my_scheduled_job_instructor'),
 ]
+
+
+
+
+STAR_SESSION_ID = 'stars'
+
+REPORT_SESSION_ID = 'report'
+
+PDD_ERRORS_SESSION_ID = 'errors'
+
+TIMER_ID = 'timer'
+
+
+CKEDITOR_CONFIGS = {
+       'default': {
+           'toolbar' : None,
+       },
+    }
+# CKEDITOR_CONFIGS = {
+#        'default': {
+#            'toolbar':[['Source', 'Link', 'Unlink', 'SpecialChar', 'Image', 'CodeSnippet']],
+#            'height': 400,
+#            'width': 900,
+#            'removePlugins': 'stylesheetparser',
+#            'extraPlugins': 'codesnippet',
+#        },
+#     }
+
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_JQUERY_URL = "https://code.jquery.com/jquery-3.1.1.min.js"
 
 
 try:

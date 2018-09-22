@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-md-12">
 <div class="pdd-menu clearfix">
-   <a href="/quiz" class="pdd-menu__item ">Экзамен</a>
+   <a href="{% url 'quiz:quiz_index' %}" class="pdd-menu__item ">Билеты ПДД</a>
    <a href="{% url 'quiz:fine_list' %}" class="pdd-menu__item active">Штрафы</a>
    <a href="{% url 'quiz:rule_list' %}" class="pdd-menu__item ">Правила</a>
    <a href="{% url 'quiz:roadsings_list' %}" class="pdd-menu__item ">Знаки</a>

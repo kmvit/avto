@@ -1,0 +1,8 @@
+.welcome {
+    position: fixed;
+    bottom: 0;
+    background: #3bb3e6;
+}
+.welcome a{
+    color:#fff;
+}
